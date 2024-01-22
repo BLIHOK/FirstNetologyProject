@@ -3,13 +3,13 @@
     <string name="app_name">NMedia</string>
     <string name="postTitle">Netology.Changing your career with education</string>
     <string name="ic_avatar_description">Netology Avatar</string>
-    <string name="ic_dot_description">Menu dots</string>
-    <string name="current_time">22 января в 17:45</string>
-    <string name="ic_watches_description">Watches</string>
-    <string name="ic_likes_description">Likes</string>
-    <string name="ic_shares_description">Shares</string>
+    <string name="ic_dot_description" translatable="false">Menu dots</string>
+    <string name="current_time">22 jan in 17:45</string>
+    <string name="ic_watches_description" translatable="false">Watches</string>
+    <string name="ic_likes_description" translatable="false">Likes</string>
+    <string name="ic_shares_description" translatable="false">Shares</string>
 
-    <string name="main_text">Понятное меню, удобный поиск, лаконичный дизайн — пользоваться такими сайтами и приложениями одно удовольствие. Удобными их делают UX/UI-дизайнеры.
+    <string name="main_text" translatable="false">Понятное меню, удобный поиск, лаконичный дизайн — пользоваться такими сайтами и приложениями одно удовольствие. Удобными их делают UX/UI-дизайнеры.
 
 На бесплатном интенсиве «Как стать UX/UI-дизайнером: создаём свой первый сайт» рассказываем, какие задачи решает специалист. Эксперт из AGIMA даст пошаговую инструкцию по созданию сайтов на Tilda.
 
