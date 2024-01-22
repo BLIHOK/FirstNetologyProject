@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">НМедия</string>
     <string name="nmedia">НМедия!</string>
+    <string name="postTitle">Нетология. Меняем карьеру через образование</string>
+    <string name="ic_avatar_description">Аватар Нетологии</string>
 </resources>
