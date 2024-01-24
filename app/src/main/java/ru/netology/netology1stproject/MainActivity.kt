@@ -36,9 +36,7 @@ class MainActivity : AppCompatActivity() {
             author.text = post.author
             published.text = post.published
             content.text = post.content
-//            likesCounter.text = post.likeCount.toString()
             likesCounter.text = changeCountersImagin(post.likeCount)
-//            sharesCounter.text = post.shareCount.toString()
             sharesCounter.text = changeCountersImagin(post.shareCount)
 
             if (post.likedByMe) {
@@ -50,34 +48,17 @@ class MainActivity : AppCompatActivity() {
                 likes.setImageResource(
                     if (post.likedByMe) R.drawable.ic_redhearth_foreground else R.drawable.ic_hearth_foreground
                 )
-//                likesCounter.text = post.likeCount.toString()
                 likesCounter.text = changeCountersImagin(post.likeCount)
             }
 
             shares.setOnClickListener {
                 post.shareCount++
-//                sharesCounter.text = post.shareCount.toString()
                 sharesCounter.text = changeCountersImagin(post.shareCount)
             }
         }
     }
 
     private fun changeCountersImagin(counter: Int): String {
-//        if (number in 1000..9999) {
-//            return "${number / 1000}K"
-//        }
-//        if (number < 1000) {
-//            return number.toString()
-//        }
-//        val suffixes = listOf("K", "M", "B", "T")
-//        val exp = (Math.log10(number.toDouble()) / 3).toInt()
-//        val value = number / Math.pow(1000.0, exp.toDouble())
-//        val formattedValue = if (value % 1 == 0.0) {
-//            value.toLong().toString()
-//        } else {
-//            "%.1f".format(value)
-//        }
-//        return "$formattedValue${suffixes[exp - 1]}"
 
 
         return when (counter) {
