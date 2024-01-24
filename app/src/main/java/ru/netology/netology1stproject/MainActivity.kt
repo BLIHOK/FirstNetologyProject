@@ -29,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         )
 
         makeLikeAndShare(binding, post)
+        with(binding) {
+            root.setOnClickListener {
+                println(1)
+            }
+            likes.setOnClickListener{
+                println(2)
+            }
+            avatar.setOnClickListener{
+                println(3)
+            }
+        }
     }
 
     private fun makeLikeAndShare(binding: ActivityMainBinding, post: Post) {
