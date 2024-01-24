@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             published = "21 мая в 18:36",
             likeCount = 1000,
             likedByMe = false,
-            shareCount = 1999,
+            shareCount = 999999,
             shareByMe = false
         )
 
