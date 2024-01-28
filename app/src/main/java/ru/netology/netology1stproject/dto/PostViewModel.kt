@@ -1,14 +1,13 @@
 package ru.netology.netology1stproject.dto
 
 import androidx.lifecycle.ViewModel
+import ru.netology.netology1stproject.repository.PostRepository
+import ru.netology.netology1stproject.repository.PostRepositoryInMemoryImpl
 
-//class PostViewModel(repository: PostRepository) : ViewModel() {
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
 
-    val data = repository.get()
-//    fun like(repository: PostRepository) = repository.like()
-    fun like() = repository.like()
-//    fun share(repository: PostRepository) = repository.share()
-    fun share() = repository.share()
+    val data = repository.getAll()
+    fun likeById(id: Long) = repository.likeById(id)
+    fun shareById(id: Long) = repository.shareById(id)
 }
