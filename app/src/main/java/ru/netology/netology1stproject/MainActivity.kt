@@ -3,10 +3,7 @@ package ru.netology.netology1stproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import ru.netology.netology1stproject.adapter.PostAdapter
-import ru.netology.netology1stproject.adapter.PostViewHolder
 import ru.netology.netology1stproject.databinding.ActivityMainBinding
 import ru.netology.netology1stproject.dto.Post
 import ru.netology.netology1stproject.dto.PostViewModel
@@ -20,14 +17,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val adapter = PostAdapter {
-            viewModel.likeById(it.id)
-            viewModel.shareById(it.id)
-        }
+        val adapter = PostAdapter(
+            onLike = { viewModel.likeById(it.id) },
+            onShare = { viewModel.shareById(it.id) }
+        )
         viewModel.data.observe(this) { posts: List<Post> ->
             adapter.submitList(posts)
         }
-
         binding.root.adapter = adapter
 
         //        binding.author?.setOnClickListener {

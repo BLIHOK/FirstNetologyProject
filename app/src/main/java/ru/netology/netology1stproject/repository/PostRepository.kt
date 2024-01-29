@@ -13,6 +13,56 @@ interface PostRepository {
 class PostRepositoryInMemoryImpl : PostRepository {
     private var posts = listOf(
         Post(
+            id = 7,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
+            published = "21 мая в 18:36",
+            likeCount = 100,
+            likedByMe = false,
+            shareCount = 2,
+            shareByMe = false
+        ),
+        Post(
+            id = 6,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
+            published = "21 мая в 18:36",
+            likeCount = 999,
+            likedByMe = false,
+            shareCount = 10000,
+            shareByMe = false
+        ),
+        Post(
+            id = 5,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
+            published = "21 мая в 18:36",
+            likeCount = 0,
+            likedByMe = false,
+            shareCount = 0,
+            shareByMe = false
+        ),
+        Post(
+            id = 4,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
+            published = "21 мая в 18:36",
+            likeCount = 2,
+            likedByMe = false,
+            shareCount = 2,
+            shareByMe = false
+        ),
+        Post(
+        id = 3,
+        author = "Нетология. Университет интернет-профессий будущего",
+        content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
+        published = "21 мая в 18:36",
+        likeCount = 9999999,
+        likedByMe = false,
+        shareCount = 7,
+        shareByMe = false
+    ),
+        Post(
             id = 2,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология!",

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.netology1stproject.R
+import ru.netology.netology1stproject.databinding.ActivityMainBinding
 import ru.netology.netology1stproject.databinding.PostCardBinding
 import ru.netology.netology1stproject.dto.Post
 
@@ -47,12 +48,14 @@ class PostViewHolder(
             likes.setImageResource(
                 if (post.likedByMe) R.drawable.ic_redhearth_foreground else R.drawable.ic_hearth_foreground
             )
+
             likes.setOnClickListener {
                 onLike(post)
             }
-            shares.setOnClickListener {
-                onShare(post)
-            }
+
+//            shares.setOnClickListener {
+//                onShare(post)
+//            }
         }
     }
 }
