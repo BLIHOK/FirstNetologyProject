@@ -9,6 +9,7 @@ import ru.netology.netology1stproject.R
 import ru.netology.netology1stproject.databinding.ActivityMainBinding
 import ru.netology.netology1stproject.databinding.PostCardBinding
 import ru.netology.netology1stproject.dto.Post
+import ru.netology.netology1stproject.adapter.UtilityCalls
 
 
 typealias onLikeListener = (post: Post) -> Unit
@@ -41,10 +42,8 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-//            likesCounter.text = changeCountersImagin(post.likeCount)
-//            sharesCounter.text = changeCountersImagin(post.shareCount)
-            likesCounter.text = post.likeCount.toString()
-            sharesCounter.text = post.shareCount.toString()
+            likesCounter.text = UtilityCalls().changeCountersImagin(post.likeCount)
+            sharesCounter.text = UtilityCalls().changeCountersImagin(post.shareCount)
             likes.setImageResource(
                 if (post.likedByMe) R.drawable.ic_redhearth_foreground else R.drawable.ic_hearth_foreground
             )
@@ -53,9 +52,14 @@ class PostViewHolder(
                 onLike(post)
             }
 
-//            shares.setOnClickListener {
-//                onShare(post)
-//            }
+            shares.setOnClickListener {
+                onShare(post)
+            }
+        }
+        binding.author.setOnClickListener {
+            ////сворачивает текст
+            binding.author.isSingleLine = !binding.author.isSingleLine
+
         }
     }
 }
@@ -65,6 +69,7 @@ object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Post, newItem: Post) =
-        oldItem.content == newItem.content
+//        oldItem.content == newItem.content
+        oldItem == newItem
 
 }
