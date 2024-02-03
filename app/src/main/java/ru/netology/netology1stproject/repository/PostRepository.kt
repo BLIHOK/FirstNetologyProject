@@ -8,81 +8,94 @@ interface PostRepository {
     fun getAll(): LiveData<List<Post>>
     fun likeById(id: Long)
     fun shareById(id: Long)
+    fun removeById(id: Long)
+    fun save(post: Post)
 }
 
+private var nextId = 0L
+
 class PostRepositoryInMemoryImpl : PostRepository {
+
     private var posts = listOf(
         Post(
-            id = 7,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
             published = "21 мая в 18:36",
             likeCount = 100,
             likedByMe = false,
             shareCount = 2,
-            shareByMe = false
+            shareByMe = false,
+            watchCount = 399
         ),
         Post(
-            id = 6,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
             published = "21 мая в 18:36",
             likeCount = 999,
             likedByMe = false,
             shareCount = 10000,
-            shareByMe = false
+            shareByMe = false,
+            watchCount = 550
         ),
         Post(
-            id = 5,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
             published = "21 мая в 18:36",
             likeCount = 0,
             likedByMe = false,
             shareCount = 0,
-            shareByMe = false
+            shareByMe = false,
+            watchCount = 3999
         ),
         Post(
-            id = 4,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
             published = "21 мая в 18:36",
             likeCount = 2,
             likedByMe = false,
             shareCount = 2,
-            shareByMe = false
+            shareByMe = false,
+            watchCount = 173
         ),
         Post(
-        id = 3,
-        author = "Нетология. Университет интернет-профессий будущего",
-        content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
-        published = "21 мая в 18:36",
-        likeCount = 9999999,
-        likedByMe = false,
-        shareCount = 7,
-        shareByMe = false
-    ),
+            id = nextId++,
+            author = "Нетология. Университет интернет-профессий будущего",
+            content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
+            published = "21 мая в 18:36",
+            likeCount = 9999999,
+            likedByMe = false,
+            shareCount = 7,
+            shareByMe = false,
+            watchCount = 178359
+        ),
         Post(
-            id = 2,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология!",
             published = "21 мая в 18:36",
             likeCount = 100,
             likedByMe = false,
             shareCount = 999,
-            shareByMe = false
+            shareByMe = false,
+            watchCount = 55547
         ),
         Post(
-            id = 1,
+            id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Это дополнительный пост для массива постов",
             published = "21 мая в 18:36",
             likeCount = 343,
             likedByMe = false,
             shareCount = 30,
-            shareByMe = false
+            shareByMe = false,
+            watchCount = 101017
         ),
-    )
+    ).reversed()
+
     private val data = MutableLiveData(posts)
 
     override fun getAll(): LiveData<List<Post>> = data
@@ -104,6 +117,22 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 shareCount = it.shareCount + 1
             )
         }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        posts = if( post.id == 0L) {
+            listOf(post.copy(id = nextId++, author = "Me", published = "now")) + posts
+        } else{
+            posts.map {
+                if (it.id != post.id) it else it.copy(content = post.content)
+            }
+        }
+        data.value = posts
+    }
+
+    override fun removeById(id: Long) {
+        posts = posts.filter { it.id != id }
         data.value = posts
     }
 }

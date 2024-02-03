@@ -1,10 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:context=".MainActivity"
-    tools:listitem="@layout/post_card"/>
+    tools:context=".MainActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/barrier_top"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/post_card" />
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="@string/post_text"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/common_spacing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/save"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/save"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/save_post"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_button" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="edit, save" />
+
+
+    <!--/////////////////////////////////////////////////////////////-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/banner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="2dp"
+        app:layout_constraintBottom_toTopOf="@id/barrier_top"
+        app:layout_constraintEnd_toEndOf="@id/save"
+        app:layout_constraintStart_toStartOf="@id/edit">
+
+        <ImageView
+            android:id="@+id/edit_banner_icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/edit_icon"
+            app:layout_constraintBottom_toBottomOf="@id/bot_banner_text"
+            app:layout_constraintEnd_toStartOf="@id/top_banner_text"
+            app:layout_constraintStart_toStartOf="@id/bot_banner_text"
+            app:srcCompat="@drawable/ic_pencil_banner" />
+
+        <ImageButton
+            android:id="@+id/close_button"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/close_edit"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/banner"
+            app:srcCompat="@drawable/ic_close_banner" />
+
+        <TextView
+            android:id="@+id/top_banner_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_spacing2"
+            android:text="@string/edit_message_banner"
+            app:layout_constraintBottom_toTopOf="@id/bot_banner_text"
+            app:layout_constraintEnd_toStartOf="@id/close_button"
+            app:layout_constraintStart_toEndOf="@id/edit_banner_icon"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/bot_banner_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/netology_banner"
+
+            app:layout_constraintEnd_toStartOf="@id/close_button"
+            app:layout_constraintStart_toEndOf="@id/edit_banner_icon"
+            app:layout_constraintTop_toBottomOf="@id/top_banner_text" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/banner_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+
+            app:constraint_referenced_ids="top_banner_text, bot_banner_text, close_button, edit_banner_icon" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

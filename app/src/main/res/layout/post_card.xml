@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/common_spacing">
@@ -49,15 +49,17 @@
         app:layout_constraintTop_toBottomOf="@+id/author"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/menu"
-        android:layout_width="@dimen/menu_size"
-        android:layout_height="@dimen/menu_size"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/ic_dot_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/dots_3_vertical_svgrepo_com" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -106,7 +108,7 @@
         android:layout_height="@dimen/icon_size"
         android:layout_marginStart="@dimen/common_spacing2"
         android:layout_marginTop="5dp"
-        android:background="#00000000"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/ic_likes_description"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +121,7 @@
         android:layout_height="@dimen/icon_size"
         android:layout_marginStart="48dp"
         android:layout_marginTop="5dp"
-        android:background="#00000000"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/ic_shares_description"
         android:scaleType="fitXY"
         app:layout_constraintStart_toEndOf="@+id/likes"
@@ -131,7 +133,7 @@
         android:layout_width="38dp"
         android:layout_height="24dp"
         android:layout_marginTop="12dp"
-        android:background="@null"
+        android:background="@android:color/transparent"
         android:ems="0"
         android:text="123"
         android:textSize="16sp"
@@ -143,7 +145,7 @@
         android:layout_width="38dp"
         android:layout_height="24dp"
         android:layout_marginTop="12dp"
-        android:background="@null"
+        android:background="@android:color/transparent"
         android:ems="0"
         android:text="25"
         android:textSize="16sp"
@@ -155,12 +157,11 @@
         android:layout_width="38dp"
         android:layout_height="24dp"
         android:layout_marginTop="12dp"
-        android:background="@null"
+        android:background="@android:color/transparent"
         android:ems="0"
         android:text="700"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/watches"
         app:layout_constraintTop_toBottomOf="@+id/content" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
