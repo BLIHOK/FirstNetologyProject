@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.edited.observe(this) { post ->
             if (post.id != 0L) {
-                binding.bannerGroup?.visibility = View.VISIBLE
+                binding.bannerGroup.visibility = View.VISIBLE
                 binding.edit.setText(post.content)
                 binding.edit.focusAndShowKeyboard()
 
@@ -64,13 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        binding.closeButton?.setOnClickListener {
+        binding.closeButton.setOnClickListener {
             val text = binding.edit.text.toString().trim()
             viewModel.changeContentAndSave(text)
             binding.edit.setText("")
             binding.edit.clearFocus()
             AndroidUtils.HideKeyboard(it)
-            binding.bannerGroup?.visibility = View.GONE
+            binding.bannerGroup.visibility = View.GONE
             return@setOnClickListener
         }
 
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             binding.edit.clearFocus()
             AndroidUtils.HideKeyboard(it)
 
-            binding.bannerGroup?.visibility = View.GONE
+            binding.bannerGroup.visibility = View.GONE
         }
 
 

@@ -16,7 +16,8 @@ private val empty = Post(
     shareCount = 0,
     watchCount = 0,
     published = "",
-)
+
+    )
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
@@ -41,7 +42,6 @@ class PostViewModel : ViewModel() {
     fun likeById(id: Long) = repository.likeById(id)
     fun shareById(id: Long) = repository.shareById(id)
     fun removeById(id: Long) = repository.removeById(id)
-
 
 
 }

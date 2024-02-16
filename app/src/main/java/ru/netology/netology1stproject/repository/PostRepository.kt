@@ -26,8 +26,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             shareCount = 2,
             shareByMe = false,
-            watchCount = 399
-        ),
+            watchCount = 399,
+
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -37,8 +38,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             shareCount = 10000,
             shareByMe = false,
-            watchCount = 550
-        ),
+            watchCount = 550,
+
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -48,8 +50,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             shareCount = 0,
             shareByMe = false,
-            watchCount = 3999
-        ),
+            watchCount = 3999,
+
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -59,8 +62,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             shareCount = 2,
             shareByMe = false,
-            watchCount = 173
-        ),
+            watchCount = 173,
+
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -70,8 +74,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             shareCount = 7,
             shareByMe = false,
-            watchCount = 178359
-        ),
+            watchCount = 178359,
+
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -81,8 +86,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             shareCount = 999,
             shareByMe = false,
-            watchCount = 55547
-        ),
+            watchCount = 55547,
+
+            ),
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -92,8 +98,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             shareCount = 30,
             shareByMe = false,
-            watchCount = 101017
-        ),
+            watchCount = 101017,
+
+            ),
     ).reversed()
 
     private val data = MutableLiveData(posts)
@@ -121,9 +128,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
     override fun save(post: Post) {
-        posts = if( post.id == 0L) {
+        posts = if (post.id == 0L) {
             listOf(post.copy(id = nextId++, author = "Me", published = "now")) + posts
-        } else{
+        } else {
             posts.map {
                 if (it.id != post.id) it else it.copy(content = post.content)
             }

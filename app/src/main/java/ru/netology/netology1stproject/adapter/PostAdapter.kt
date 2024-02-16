@@ -55,10 +55,12 @@ class PostViewHolder(
             likes.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
+            shares.isChecked = post.shareByMe
 
             shares.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
+
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

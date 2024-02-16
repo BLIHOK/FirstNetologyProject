@@ -49,18 +49,27 @@
         app:layout_constraintTop_toBottomOf="@+id/author"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="34dp"
         android:layout_height="34dp"
         android:layout_marginTop="@dimen/common_spacing"
         android:layout_marginEnd="@dimen/common_spacing"
-        android:background="@android:color/transparent"
+        android:checkable="true"
         android:contentDescription="@string/ic_dot_description"
-        android:scaleType="fitXY"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        app:icon="@drawable/icon_menu_selector"
+        app:iconPadding="0dp"
+        app:iconSize="40dp"
+        app:iconTint="@color/menu_checkbox_tint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dots_3_vertical_svgrepo_com" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/header"
@@ -105,33 +114,48 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/likes"
-        style="@style/Widget.AppTheme.LikeCheckBox"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_marginStart="@dimen/common_spacing2"
         android:layout_marginTop="5dp"
         android:checkable="true"
-
         android:contentDescription="@string/ic_likes_description"
-        android:scaleType="fitXY"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
         app:icon="@drawable/icon_like_selector"
-
+        app:iconPadding="0dp"
+        app:iconSize="48dp"
+        app:iconTint="@color/like_checkbox_tint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content" />
 
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/shares"
+        style="@style/Widget.Material3.Button.IconButton"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
         android:layout_marginStart="48dp"
         android:layout_marginTop="5dp"
-        android:background="@android:color/transparent"
+        android:checkable="true"
         android:contentDescription="@string/ic_shares_description"
-        android:scaleType="fitXY"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:paddingLeft="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        app:icon="@drawable/icon_share_selector"
+        app:iconPadding="0dp"
+        app:iconSize="48dp"
+        app:iconTint="@color/share_checkbox_tint"
         app:layout_constraintStart_toEndOf="@+id/likes"
-        app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@drawable/ic_share_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 
     <TextView
         android:id="@+id/likes_counter"

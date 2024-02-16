@@ -13,17 +13,6 @@
 
     <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.Material3.Button.IconButton">
 
-        <item name="maxImageSize">@dimen/icon_size</item>
-        <item name="android:iconTint">@color/like_checkbox_tint</item>
-        <item name="iconSize">@dimen/icon_size</item>
-        <item name="iconPadding">0dp</item>
-        <item name="iconGravity">start</item>
-        <item name="android:padding">0dp</item>
-        app:iconSize="@dimen/icon_size"
-        app:iconGravity="start"
-        app:iconPadding="0dp"
-        android:padding="0dp"
-
     </style>
 
 </resources>
