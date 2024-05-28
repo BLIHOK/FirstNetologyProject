@@ -44,14 +44,10 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likesCounter.text = AndroidUtils.changeCountersImagin(post.likeCount)
-            sharesCounter.text = AndroidUtils.changeCountersImagin(post.shareCount)
+            likes.text = AndroidUtils.changeCountersImagin(post.likeCount)
+            shares.text = AndroidUtils.changeCountersImagin(post.shareCount)
             watchesCounter.text = AndroidUtils.changeCountersImagin(post.watchCount)
-//            likes.setImageResource(
-//                if (post.likedByMe) R.drawable.ic_redhearth_foreground else R.drawable.ic_hearth_foreground
-//            )
             likes.isChecked = post.likedByMe
-
             likes.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
