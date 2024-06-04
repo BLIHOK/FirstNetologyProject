@@ -59,7 +59,8 @@ class PostViewHolder(
 
 
             menu.setOnClickListener {
-                PopupMenu(it.context, it).apply {
+                menu.isChecked = true
+                val popupMenu = PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
@@ -70,15 +71,17 @@ class PostViewHolder(
 
                             R.id.edit -> {
                                 onInteractionListener.onEdit(post)
-
-
                                 true
                             }
 
                             else -> false
                         }
                     }
-                }.show()
+                }
+                    popupMenu.show()
+                popupMenu.setOnDismissListener {
+                    binding.menu.isChecked = false
+                }
             }
 
         }

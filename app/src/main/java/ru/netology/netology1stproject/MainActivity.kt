@@ -1,9 +1,11 @@
 package ru.netology.netology1stproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import ru.netology.netology1stproject.adapter.PostAdapter
 import ru.netology.netology1stproject.adapter.onInteractionListener
@@ -28,7 +30,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
+//                viewModel.shareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(intent, getString(R.string.post_text))// НЕЛЬЗЯ ВЫБРАТЬ chooser_share_post
+                startActivity(shareIntent)
             }
 
             override fun onRemove(post: Post) {
@@ -51,6 +61,15 @@ class MainActivity : AppCompatActivity() {
                     binding.list.smoothScrollToPosition(0)
                 }
             }
+        }
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) {result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContentAndSave (result)
+        }
+
+        binding.setOnClickListener {
+            newPostLauncher.launch()
         }
 
 
