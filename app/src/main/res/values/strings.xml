@@ -8,6 +8,10 @@
     <string name="ic_watches_description" translatable="false">Watches</string>
     <string name="ic_likes_description" translatable="false">Likes</string>
     <string name="ic_shares_description" translatable="false">Shares</string>
+    <string name="menu_remove">Remove</string>
+    <string name="post_text">Post text</string>
+    <string name="menu_edit">Edit</string>
+    <string name="error_empty_content">Content can\'t be empty</string>
 
     <string name="content" translatable="false">Понятное меню, удобный поиск, лаконичный дизайн — пользоваться такими сайтами и приложениями одно удовольствие. Удобными их делают UX/UI-дизайнеры.
 
@@ -21,7 +25,11 @@
 В подарок все участники получат чек-лист «Фриланс или удалёнка: что выбрать».
 
 Регистрируйтесь, чтобы на практике познакомиться с задачами UX/UI-дизайнеров и понять, с чего начать карьеру в сфере: https://netolo.gy/cJ3N</string>
-
+    <string name="save_post" translatable="false">Save post</string>
+    <string name="edit_icon" translatable="false">edit icon</string>
+    <string name="close_edit" translatable="false">Close edit</string>
+    <string name="netology_banner">Netology</string>
+    <string name="edit_message_banner">Edit message</string>
 
 
 </resources>
