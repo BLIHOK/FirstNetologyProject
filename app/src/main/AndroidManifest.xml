@@ -12,12 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstNetologyProject"
         tools:targetApi="31">
+
+
         <activity
-            android:name=".NewPostActivity"
-            android:exported="false" />
+            android:name=".EditActivity"
+            android:exported="false">
+        <intent-filter>
+            <action android:name="android.intent.action.INSERT_OR_EDIT" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+
+            <data android:mimeType="text/plain" />
+        </intent-filter>
+
+        </activity>
+
+
         <activity
             android:name=".IntentHandlerActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
@@ -26,6 +39,8 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

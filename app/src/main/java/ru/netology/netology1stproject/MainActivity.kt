@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     type = "text/plain"
                 }
 
-                val shareIntent = Intent.createChooser(intent, getString(R.string.post_text))// НЕЛЬЗЯ ВЫБРАТЬ chooser_share_post
+                val shareIntent = Intent.createChooser(intent, getString(R.string.content))// НЕЛЬЗЯ ВЫБРАТЬ chooser_share_post
                 startActivity(shareIntent)
             }
 
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.changeContentAndSave (result)
         }
 
-        binding.setOnClickListener {
+        binding.save.setOnClickListener {
             newPostLauncher.launch()
         }
 
