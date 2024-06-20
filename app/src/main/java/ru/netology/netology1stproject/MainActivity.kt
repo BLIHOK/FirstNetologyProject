@@ -1,12 +1,16 @@
 package ru.netology.netology1stproject
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.activity.result.launch
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
 import ru.netology.netology1stproject.adapter.PostAdapter
 import ru.netology.netology1stproject.adapter.onInteractionListener
 import ru.netology.netology1stproject.databinding.ActivityMainBinding
@@ -30,14 +34,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onShare(post: Post) {
-//                viewModel.shareById(post.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, post.content)
                     type = "text/plain"
                 }
 
-                val shareIntent = Intent.createChooser(intent, getString(R.string.content))// НЕЛЬЗЯ ВЫБРАТЬ chooser_share_post
+                val shareIntent =
+                    Intent.createChooser(intent, getString(R.string.choose_share_post))
                 startActivity(shareIntent)
             }
 
@@ -63,14 +67,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) {result ->
+        //////////
+        binding.banner.visibility = View.GONE
+        binding.edit.visibility = View.GONE
+        binding.bannerGroup.visibility = View.GONE
+        binding.barrierTop.visibility = View.GONE
+        ///////////////
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
             result ?: return@registerForActivityResult
-            viewModel.changeContentAndSave (result)
+            viewModel.changeContentAndSave(result)
         }
 
         binding.save.setOnClickListener {
             newPostLauncher.launch()
         }
+
+
 
 
         viewModel.edited.observe(this) { post ->
@@ -93,24 +106,31 @@ class MainActivity : AppCompatActivity() {
             return@setOnClickListener
         }
 
-        binding.save.setOnClickListener {
-            val text = binding.edit.text.toString().trim()
-            if (text.isEmpty()) {
-                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
 
-            viewModel.changeContentAndSave(text)
-
-            binding.edit.setText("")
-            binding.edit.clearFocus()
-            AndroidUtils.HideKeyboard(it)
-
-            binding.bannerGroup.visibility = View.GONE
-        }
-
+//        binding.save.setOnClickListener {
+//            val text = binding.edit.text.toString().trim()
+//            if (text.isEmpty()) {
+//                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
+//                return@setOnClickListener
+//            }
+//
+//            viewModel.changeContentAndSave(text)
+//
+//            binding.edit.setText("")
+//            binding.edit.clearFocus()
+//            AndroidUtils.HideKeyboard(it)
+//
+//            binding.bannerGroup.visibility = View.GONE
+//        }
 
     }
+
+
+
+
+
+
+
 
 }
 

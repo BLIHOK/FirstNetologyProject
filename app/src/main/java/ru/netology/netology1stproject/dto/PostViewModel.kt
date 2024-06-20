@@ -16,8 +16,8 @@ private val empty = Post(
     shareCount = 0,
     watchCount = 0,
     published = "",
-
-    )
+    video = null
+)
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()

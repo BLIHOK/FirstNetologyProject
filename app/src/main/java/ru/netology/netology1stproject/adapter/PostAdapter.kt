@@ -1,12 +1,27 @@
 package ru.netology.netology1stproject.adapter
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.LocalSocketAddress
+import androidx.core.content.ContextCompat
+import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat.getContextForLanguage
+import androidx.core.content.ContextCompat.startActivities
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Visibility
+import ru.netology.netology1stproject.IntentHandlerActivity
 import ru.netology.netology1stproject.R
+import ru.netology.netology1stproject.databinding.ActivityIntentHandlerBinding
 import ru.netology.netology1stproject.databinding.PostCardBinding
 import ru.netology.netology1stproject.dto.Post
 import ru.netology.netology1stproject.utils.AndroidUtils
@@ -21,7 +36,7 @@ interface onInteractionListener {
 
 class PostAdapter(
     private val onInteractionListener: onInteractionListener
-) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
+) : ListAdapter<Post, PostViewHolder>(PostViewHolder.PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view = PostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -56,6 +71,12 @@ class PostViewHolder(
             shares.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
+            videoContent.setOnClickListener {
+                val video = Uri.parse(post.video)
+                IntentHandlerActivity().playMedia(video)
+
+
+            }
 
 
             menu.setOnClickListener {
@@ -78,7 +99,7 @@ class PostViewHolder(
                         }
                     }
                 }
-                    popupMenu.show()
+                popupMenu.show()
                 popupMenu.setOnDismissListener {
                     binding.menu.isChecked = false
                 }
@@ -93,14 +114,15 @@ class PostViewHolder(
         }
 
     }
-}
 
 
-object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
-    override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem.id == newItem.id
+    object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
+        override fun areItemsTheSame(oldItem: Post, newItem: Post) = oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: Post, newItem: Post) =
-//        oldItem.content == newItem.content
-        oldItem == newItem
+        override fun areContentsTheSame(oldItem: Post, newItem: Post) =
+            oldItem == newItem
+
+    }
+
 
 }

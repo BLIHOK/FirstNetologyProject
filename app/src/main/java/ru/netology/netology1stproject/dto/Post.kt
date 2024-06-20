@@ -10,5 +10,5 @@ data class Post(
     val shareCount: Int,
     val shareByMe: Boolean,
     val watchCount: Int,
-
+    val video: String?,
     )

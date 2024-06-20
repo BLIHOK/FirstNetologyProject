@@ -84,12 +84,29 @@
         app:layout_constraintTop_toBottomOf="@id/published"
         app:layout_constraintVertical_chainStyle="packed" />
 
+    <VideoView
+        android:id="@+id/video_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginStart="@dimen/common_spacing2"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="@dimen/common_spacing2"
+        android:foreground="@mipmap/ic_rick_astley"
+        android:text="@string/choose_share_post"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="author, published, avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintVertical_chainStyle="packed" />
+    />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/footer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
+        app:constraint_referenced_ids="video_content" />
 
     <ImageView
         android:id="@+id/watches"
@@ -99,7 +116,7 @@
         android:layout_marginEnd="52dp"
         android:contentDescription="@string/ic_watches_description"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content"
+        app:layout_constraintTop_toBottomOf="@+id/video_content"
         app:srcCompat="@drawable/ic_eye_foreground" />
 
 
@@ -114,7 +131,7 @@
         android:contentDescription="@string/ic_likes_description"
         app:icon="@drawable/icon_like_selector"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/video_content" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -128,7 +145,7 @@
         android:contentDescription="@string/ic_shares_description"
         app:icon="@drawable/icon_share_selector"
         app:layout_constraintStart_toEndOf="@+id/likes"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/video_content" />
 
 
     <TextView
@@ -141,6 +158,6 @@
         android:text="700"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/watches"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+        app:layout_constraintTop_toBottomOf="@+id/video_content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
