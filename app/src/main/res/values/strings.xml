@@ -31,6 +31,7 @@
     <string name="close_edit" translatable="false">Close edit</string>
     <string name="netology_banner">Netology</string>
     <string name="edit_message_banner">Edit message</string>
+    <string name="press_to_start_video">Press to start video</string>
 
 
 </resources>

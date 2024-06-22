@@ -84,13 +84,14 @@
         app:layout_constraintTop_toBottomOf="@id/published"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <VideoView
+    <ImageView
         android:id="@+id/video_content"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginStart="@dimen/common_spacing2"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="@dimen/common_spacing2"
+        android:contentDescription="@string/press_to_start_video"
         android:foreground="@mipmap/ic_rick_astley"
         android:text="@string/choose_share_post"
         app:barrierDirection="start"

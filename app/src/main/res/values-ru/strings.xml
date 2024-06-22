@@ -11,5 +11,6 @@
     <string name="error_empty_content">Содержимое не может быть пустым</string>
     <string name="netology_banner">Нетология</string>
     <string name="edit_message_banner">Редактировать сообщение</string>
+    <string name="press_to_start_video">Press to start video</string>
 
 </resources>

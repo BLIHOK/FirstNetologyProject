@@ -1,20 +1,19 @@
 package ru.netology.netology1stproject
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.widget.VideoView
-import androidx.annotation.RequiresApi
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.transition.Visibility
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
 import ru.netology.netology1stproject.databinding.ActivityIntentHandlerBinding
+import ru.netology.netology1stproject.dto.PostViewModel
 
 
 class IntentHandlerActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,15 +38,18 @@ class IntentHandlerActivity : AppCompatActivity() {
 
             binding.content.text = text
 
-        }
-    }
-    fun playMedia(file: Uri) {
 
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = file
         }
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        }
+
     }
+
+//    override fun onResume() {
+//        super.onResume()
+//        val binding = ActivityIntentHandlerBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+//        binding.menu.setOnClickListener {
+//            intent
+//        }
+//    }
+
 }

@@ -1,5 +1,7 @@
 package ru.netology.netology1stproject
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import android.widget.VideoView
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -54,6 +57,16 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+            override fun playMedia(post: Post) {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(post.video)
+                }
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
+
+            }
+
         }
         )
 
@@ -68,23 +81,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         //////////
-        binding.banner.visibility = View.GONE
-        binding.edit.visibility = View.GONE
-        binding.bannerGroup.visibility = View.GONE
-        binding.barrierTop.visibility = View.GONE
+//        binding.banner.visibility = View.GONE
+//        binding.edit.visibility = View.GONE
+//        binding.bannerGroup.visibility = View.GONE
+//        binding.barrierTop.visibility = View.GONE
         ///////////////
 
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContentAndSave(result)
-        }
+//        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+//            result ?: return@registerForActivityResult
+//            viewModel.changeContentAndSave(result)
+//        }
+//
+//        binding.save.setOnClickListener {
+//            newPostLauncher.launch()
+//        }
+
 
         binding.save.setOnClickListener {
-            newPostLauncher.launch()
+            val text = binding.edit.text.toString().trim()
+            if (text.isEmpty()) {
+                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            viewModel.changeContentAndSave(text)
+
+            binding.edit.setText("")
+            binding.edit.clearFocus()
+            AndroidUtils.HideKeyboard(it)
+
+            binding.bannerGroup.visibility = View.GONE
         }
-
-
-
 
         viewModel.edited.observe(this) { post ->
             if (post.id != 0L) {
@@ -107,31 +134,20 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-//        binding.save.setOnClickListener {
-//            val text = binding.edit.text.toString().trim()
-//            if (text.isEmpty()) {
-//                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
-//                return@setOnClickListener
-//            }
-//
-//            viewModel.changeContentAndSave(text)
-//
-//            binding.edit.setText("")
-//            binding.edit.clearFocus()
-//            AndroidUtils.HideKeyboard(it)
-//
-//            binding.bannerGroup.visibility = View.GONE
-//        }
+        NewPostResultContract().createIntent(IntentHandlerActivity(), IntentHandlerActivity().intent.getStringExtra(Intent.EXTRA_TEXT))
+
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContentAndSave(result)
+        }
+
+        binding.save.setOnClickListener {
+            newPostLauncher.launch(NewPostActivity().intent.putExtras(Intent.EXTRA_TEXT))
+        }
+
 
     }
-
-
-
-
-
-
-
-
 }
 
 

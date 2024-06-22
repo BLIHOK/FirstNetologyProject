@@ -32,6 +32,7 @@ interface onInteractionListener {
     fun onShare(post: Post)
     fun onRemove(post: Post)
     fun onEdit(post: Post)
+    fun playMedia(post: Post)
 }
 
 class PostAdapter(
@@ -46,6 +47,16 @@ class PostAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
+//    fun playMedia(file: Uri) {
+//
+//        val intent = Intent(Intent.ACTION_VIEW).apply {
+//            data = file
+//        }
+//        if (intent.resolveActivity(packageManager) != null) {
+//            startActivity(intent)
+//        }
+//    }
 }
 
 
@@ -72,10 +83,7 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
             videoContent.setOnClickListener {
-                val video = Uri.parse(post.video)
-                IntentHandlerActivity().playMedia(video)
-
-
+                onInteractionListener.playMedia(post)
             }
 
 
