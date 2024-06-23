@@ -48,15 +48,7 @@ class PostAdapter(
         holder.bind(getItem(position))
     }
 
-//    fun playMedia(file: Uri) {
-//
-//        val intent = Intent(Intent.ACTION_VIEW).apply {
-//            data = file
-//        }
-//        if (intent.resolveActivity(packageManager) != null) {
-//            startActivity(intent)
-//        }
-//    }
+
 }
 
 

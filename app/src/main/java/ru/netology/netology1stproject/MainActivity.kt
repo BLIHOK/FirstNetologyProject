@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.content.MimeTypeFilter
 import androidx.lifecycle.ViewModel
 import ru.netology.netology1stproject.adapter.PostAdapter
 import ru.netology.netology1stproject.adapter.onInteractionListener
@@ -134,20 +135,26 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        NewPostResultContract().createIntent(IntentHandlerActivity(), IntentHandlerActivity().intent.getStringExtra(Intent.EXTRA_TEXT))
-
-
         val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
             result ?: return@registerForActivityResult
+            NewPostResultContract().createIntent(IntentHandlerActivity(), IntentHandlerActivity().intentText)
             viewModel.changeContentAndSave(result)
+
         }
 
         binding.save.setOnClickListener {
-            newPostLauncher.launch(NewPostActivity().intent.putExtras(Intent.EXTRA_TEXT))
+            newPostLauncher.launch(
+                NewPostResultContract().parseResult(
+                    RESULT_OK,
+                    IntentHandlerActivity().intent
+                )
+            )
+
         }
 
 
     }
+
 }
 
 

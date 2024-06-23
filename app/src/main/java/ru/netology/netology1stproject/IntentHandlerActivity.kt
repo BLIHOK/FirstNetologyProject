@@ -13,7 +13,7 @@ import ru.netology.netology1stproject.dto.PostViewModel
 
 
 class IntentHandlerActivity : AppCompatActivity() {
-
+    var intentText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,19 +37,10 @@ class IntentHandlerActivity : AppCompatActivity() {
             }
 
             binding.content.text = text
-
+            intentText = text
 
         }
 
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        val binding = ActivityIntentHandlerBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//        binding.menu.setOnClickListener {
-//            intent
-//        }
-//    }
 
 }
