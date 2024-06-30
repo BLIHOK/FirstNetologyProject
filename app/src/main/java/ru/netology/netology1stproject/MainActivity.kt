@@ -31,7 +31,16 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val viewModel: PostViewModel by viewModels()
+
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+            viewModel.changeContentAndSave(result)
+        }
+
+
         val adapter = PostAdapter(object : onInteractionListener {
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
@@ -55,6 +64,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
+                newPostLauncher.launch(post.content)
+
 
             }
 
@@ -80,23 +91,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        //////////
-//        binding.banner.visibility = View.GONE
-//        binding.edit.visibility = View.GONE
-//        binding.bannerGroup.visibility = View.GONE
-//        binding.barrierTop.visibility = View.GONE
-        ///////////////
-
-//        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-//            result ?: return@registerForActivityResult
-//            viewModel.changeContentAndSave(result)
-//        }
-//
-//        binding.save.setOnClickListener {
-//            newPostLauncher.launch()
-//        }
-
 
         binding.save.setOnClickListener {
             val text = binding.edit.text.toString().trim()
@@ -132,24 +126,6 @@ class MainActivity : AppCompatActivity() {
             AndroidUtils.HideKeyboard(it)
             binding.bannerGroup.visibility = View.GONE
             return@setOnClickListener
-        }
-
-
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            NewPostResultContract().createIntent(IntentHandlerActivity(), IntentHandlerActivity().intentText)
-            viewModel.changeContentAndSave(result)
-
-        }
-
-        binding.save.setOnClickListener {
-            newPostLauncher.launch(
-                NewPostResultContract().parseResult(
-                    RESULT_OK,
-                    IntentHandlerActivity().intent
-                )
-            )
-
         }
 
 

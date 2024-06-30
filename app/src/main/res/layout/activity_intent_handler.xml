@@ -2,8 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="@dimen/common_spacing">
 
     <ImageView
@@ -62,12 +63,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar, published, menu" />
 
     <TextView
         android:id="@+id/content"
@@ -85,12 +80,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
+
 
     <ImageView
         android:id="@+id/watches"
@@ -143,5 +133,14 @@
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/watches"
         app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <Button
+        android:id="@+id/fab"
+        android:layout_width="102dp"
+        android:layout_height="77dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
