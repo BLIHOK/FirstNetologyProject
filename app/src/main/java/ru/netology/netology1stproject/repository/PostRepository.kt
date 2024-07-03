@@ -39,7 +39,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             shareCount = 10000,
             shareByMe = false,
             watchCount = 550,
-            video = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            video = null
         ),
         Post(
             id = nextId++,
@@ -63,7 +63,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             shareCount = 2,
             shareByMe = false,
             watchCount = 173,
-            video = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            video = null
         ),
         Post(
             id = nextId++,
@@ -75,7 +75,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             shareCount = 7,
             shareByMe = false,
             watchCount = 178359,
-            video = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            video = null
         ),
         Post(
             id = nextId++,
@@ -99,7 +99,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             shareCount = 30,
             shareByMe = false,
             watchCount = 101017,
-            video = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            video = null
         ),
     ).reversed()
 

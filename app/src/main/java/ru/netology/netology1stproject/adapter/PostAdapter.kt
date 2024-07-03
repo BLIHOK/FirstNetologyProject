@@ -74,6 +74,8 @@ class PostViewHolder(
             shares.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
+
+            if(post.video == null)  videoContent.visibility = View.GONE
             videoContent.setOnClickListener {
                 onInteractionListener.playMedia(post)
             }

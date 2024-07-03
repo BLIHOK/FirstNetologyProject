@@ -92,41 +92,41 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.save.setOnClickListener {
-            val text = binding.edit.text.toString().trim()
-            if (text.isEmpty()) {
-                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+//        binding.save.setOnClickListener {
+//            val text = binding.edit.text.toString().trim()
+//            if (text.isEmpty()) {
+//                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
+//                return@setOnClickListener
+//            }
+//
+//            viewModel.changeContentAndSave(text)
+//
+//            binding.edit.setText("")
+//            binding.edit.clearFocus()
+//            AndroidUtils.HideKeyboard(it)
+//
+//            binding.bannerGroup.visibility = View.GONE
+//        }
 
-            viewModel.changeContentAndSave(text)
-
-            binding.edit.setText("")
-            binding.edit.clearFocus()
-            AndroidUtils.HideKeyboard(it)
-
-            binding.bannerGroup.visibility = View.GONE
-        }
-
-        viewModel.edited.observe(this) { post ->
-            if (post.id != 0L) {
-                binding.bannerGroup.visibility = View.VISIBLE
-                binding.edit.setText(post.content)
-                binding.edit.focusAndShowKeyboard()
-
-            }
-
-        }
-
-        binding.closeButton.setOnClickListener {
-            val text = binding.edit.text.toString().trim()
-            viewModel.changeContentAndSave(text)
-            binding.edit.setText("")
-            binding.edit.clearFocus()
-            AndroidUtils.HideKeyboard(it)
-            binding.bannerGroup.visibility = View.GONE
-            return@setOnClickListener
-        }
+//        viewModel.edited.observe(this) { post ->
+//            if (post.id != 0L) {
+//                binding.bannerGroup.visibility = View.VISIBLE
+//                binding.edit.setText(post.content)
+//                binding.edit.focusAndShowKeyboard()
+//
+//            }
+//
+//        }
+//
+//        binding.closeButton.setOnClickListener {
+//            val text = binding.edit.text.toString().trim()
+//            viewModel.changeContentAndSave(text)
+//            binding.edit.setText("")
+//            binding.edit.clearFocus()
+//            AndroidUtils.HideKeyboard(it)
+//            binding.bannerGroup.visibility = View.GONE
+//            return@setOnClickListener
+//        }
 
 
     }
