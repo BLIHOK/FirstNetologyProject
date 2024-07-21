@@ -1,20 +1,13 @@
 package ru.netology.netology1stproject
 
-import android.app.Activity
-import android.content.Context
+
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import android.widget.VideoView
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.launch
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
-import androidx.core.content.MimeTypeFilter
-import androidx.lifecycle.ViewModel
 import ru.netology.netology1stproject.adapter.PostAdapter
 import ru.netology.netology1stproject.adapter.onInteractionListener
 import ru.netology.netology1stproject.databinding.ActivityMainBinding
@@ -92,46 +85,47 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        binding.save.setOnClickListener {
-//            val text = binding.edit.text.toString().trim()
-//            if (text.isEmpty()) {
-//                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
-//                return@setOnClickListener
-//            }
-//
-//            viewModel.changeContentAndSave(text)
-//
-//            binding.edit.setText("")
-//            binding.edit.clearFocus()
-//            AndroidUtils.HideKeyboard(it)
-//
-//            binding.bannerGroup.visibility = View.GONE
-//        }
+        binding.save.setOnClickListener {
+            val text = binding.edit.text.toString().trim()
+            if (text.isEmpty()) {
+                Toast.makeText(this, R.string.error_empty_content, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
-//        viewModel.edited.observe(this) { post ->
-//            if (post.id != 0L) {
-//                binding.bannerGroup.visibility = View.VISIBLE
-//                binding.edit.setText(post.content)
-//                binding.edit.focusAndShowKeyboard()
-//
-//            }
-//
-//        }
-//
-//        binding.closeButton.setOnClickListener {
-//            val text = binding.edit.text.toString().trim()
-//            viewModel.changeContentAndSave(text)
-//            binding.edit.setText("")
-//            binding.edit.clearFocus()
-//            AndroidUtils.HideKeyboard(it)
-//            binding.bannerGroup.visibility = View.GONE
-//            return@setOnClickListener
-//        }
+            viewModel.changeContentAndSave(text)
 
+            binding.edit.setText("")
+            binding.edit.clearFocus()
+            AndroidUtils.HideKeyboard(it)
+
+            binding.bannerGroup.visibility = View.GONE
+        }
+
+        viewModel.edited.observe(this) { post ->
+            if (post.id != 0L) {
+                binding.bannerGroup.visibility = View.VISIBLE
+                binding.edit.setText(post.content)
+                binding.edit.focusAndShowKeyboard()
+
+            }
+
+        }
+
+        binding.closeButton.setOnClickListener {
+            val text = binding.edit.text.toString().trim()
+            viewModel.changeContentAndSave(text)
+            binding.edit.setText("")
+            binding.edit.clearFocus()
+            AndroidUtils.HideKeyboard(it)
+            binding.bannerGroup.visibility = View.GONE
+            return@setOnClickListener
+        }
+
+
+        }
 
     }
 
-}
 
 
 

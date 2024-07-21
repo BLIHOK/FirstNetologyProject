@@ -1,27 +1,14 @@
 package ru.netology.netology1stproject.adapter
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.LocalSocketAddress
-import androidx.core.content.ContextCompat
-import android.net.Uri
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.content.ContextCompat.getContextForLanguage
-import androidx.core.content.ContextCompat.startActivities
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.Visibility
-import ru.netology.netology1stproject.IntentHandlerActivity
 import ru.netology.netology1stproject.R
-import ru.netology.netology1stproject.databinding.ActivityIntentHandlerBinding
 import ru.netology.netology1stproject.databinding.PostCardBinding
 import ru.netology.netology1stproject.dto.Post
 import ru.netology.netology1stproject.utils.AndroidUtils
@@ -75,7 +62,9 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
 
-            if(post.video == null)  videoContent.visibility = View.GONE
+            if (post.video == null) videoContent.visibility = View.GONE
+            if (post.video != null) videoContent.visibility = View.VISIBLE
+
             videoContent.setOnClickListener {
                 onInteractionListener.playMedia(post)
             }
