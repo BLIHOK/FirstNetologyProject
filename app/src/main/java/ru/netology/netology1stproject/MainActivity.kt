@@ -5,16 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import ru.netology.netology1stproject.adapter.PostAdapter
 import ru.netology.netology1stproject.adapter.onInteractionListener
 import ru.netology.netology1stproject.databinding.ActivityMainBinding
 import ru.netology.netology1stproject.dto.Post
 import ru.netology.netology1stproject.dto.PostViewModel
-import ru.netology.netology1stproject.utils.AndroidUtils
-import ru.netology.netology1stproject.utils.AndroidUtils.focusAndShowKeyboard
 
 
 class MainActivity : AppCompatActivity() {
