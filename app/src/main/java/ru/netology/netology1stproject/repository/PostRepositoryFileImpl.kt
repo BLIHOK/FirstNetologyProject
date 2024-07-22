@@ -7,22 +7,13 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.netology1stproject.dto.Post
 
-//interface PostRepository {
-//    fun getAll(): LiveData<List<Post>>
-//    fun likeById(id: Long)
-//    fun shareById(id: Long)
-//    fun removeById(id: Long)
-//    fun save(post: Post)
-//}
-
-
 
 class PostRepositoryFileImpl (private val context: Context) : PostRepository {
     private val gson = Gson()
 
     private val typeToken = TypeToken.getParameterized(List::class.java, Post::class.java).type
     private val fileName = "posts.json"
-    private var nextId = 0L
+    private var nextId = 1L
     private var posts = emptyList<Post>()
         private set(value) {
             field = value
