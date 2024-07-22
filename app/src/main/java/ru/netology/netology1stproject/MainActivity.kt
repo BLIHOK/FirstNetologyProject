@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity() {
         }
         )
 
+        binding.save.setOnClickListener {
+            newPostLauncher.launch(null)
+        }
+
 
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts: List<Post> ->

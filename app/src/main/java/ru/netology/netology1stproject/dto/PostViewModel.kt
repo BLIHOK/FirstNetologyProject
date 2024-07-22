@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.netology1stproject.repository.PostRepository
 import ru.netology.netology1stproject.repository.PostRepositoryFileImpl
-import ru.netology.netology1stproject.repository.PostRepositorySharedPreference
+
 
 private val empty = Post(
     id = 0,

@@ -66,7 +66,6 @@ class PostRepositoryFileImpl (private val context: Context) : PostRepository {
             }
         }
         data.value = posts
-
     }
 
     override fun removeById(id: Long) {

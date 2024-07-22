@@ -34,8 +34,6 @@ class PostAdapter(
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
-
 }
 
 
@@ -95,15 +93,13 @@ class PostViewHolder(
                     binding.menu.isChecked = false
                 }
             }
-
         }
+
 
         binding.author.setOnClickListener {
             ////сворачивает текст
             binding.author.isSingleLine = !binding.author.isSingleLine
-
         }
-
     }
 
 

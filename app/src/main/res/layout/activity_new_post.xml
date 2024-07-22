@@ -50,7 +50,7 @@
         app:constraint_referenced_ids="edit, save" />
 
 
-    <!--/////////////////////////////////////////////////////////////-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/banner"
         android:layout_width="0dp"

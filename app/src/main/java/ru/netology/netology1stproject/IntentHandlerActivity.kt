@@ -33,12 +33,7 @@ class IntentHandlerActivity : AppCompatActivity() {
                     .show()
                 return@let
             }
-
             binding.content.text = text
-
-
         }
-
     }
-
 }
