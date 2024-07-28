@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import ru.netology.netology1stproject.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.NewPostResultContract
@@ -21,10 +22,10 @@ import ru.netology.netology1stproject.dto.PostViewModel
 
 class OnePostFragment : Fragment() {
 
-//    val viewModel: PostViewModel by viewModels(
+    //    val viewModel: PostViewModel by viewModels(
 //        ownerProducer = ::requireParentFragment
 //    )
-val viewModel: PostViewModel by activityViewModels()
+    val viewModel: PostViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,18 +70,23 @@ val viewModel: PostViewModel by activityViewModels()
             }
 
             override fun onOpen(post: Post) {
-                findNavController().navigate(
-                    R.id.action_feedFragment_to_onePostFragment, Bundle().apply {
-                        textArg = post.id.toString()
-                    }
-                )
+                if (findNavController().currentDestination?.id != R.id.onePostFragment) {
+                    findNavController().navigate(
+                        R.id.action_feedFragment_to_onePostFragment,
+                        Bundle().apply { textArg = post.id.toString() }
+                    )
+                }
             }
         })
 
+
         viewModel.edited.observe(viewLifecycleOwner) {
             if (it.id != 0L) {
-                findNavController().navigate(R.id.action_onePostFragment_to_newPostFragment2, Bundle().apply {
-                    textArg = it.content })
+                findNavController().navigate(
+                    R.id.action_onePostFragment_to_newPostFragment2,
+                    Bundle().apply {
+                        textArg = it.content
+                    })
             }
         }
 
@@ -92,6 +98,7 @@ val viewModel: PostViewModel by activityViewModels()
             }
             viewHolder.bind(post)
         }
+
 
 
         return binding.root
