@@ -15,8 +15,15 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name=".AppActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,43 +47,7 @@
         </activity>
 
 
-        <activity
-            android:name=".NewPostActivity"
-            android:exported="false">
-
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-
-
-        </activity>
-
-
-        <activity
-            android:name=".IntentHandlerActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-
-        </activity>
     </application>
 
-
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="*" />
-
-        </intent>
-    </queries>
 
 </manifest>

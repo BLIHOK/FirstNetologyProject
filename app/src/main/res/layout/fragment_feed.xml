@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:context=".MainActivity">
+    tools:context=".FeedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
@@ -50,13 +50,14 @@
         app:constraint_referenced_ids="edit, save" />
 
 
-
+    <!--/////////////////////////////////////////////////////////////-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/banner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="2dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/barrier_top"
         app:layout_constraintEnd_toEndOf="@id/save"
         app:layout_constraintStart_toStartOf="@id/edit">

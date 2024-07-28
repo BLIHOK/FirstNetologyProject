@@ -20,6 +20,7 @@ interface onInteractionListener {
     fun onRemove(post: Post)
     fun onEdit(post: Post)
     fun playMedia(post: Post)
+    fun onOpen(post: Post)
 }
 
 class PostAdapter(
@@ -93,13 +94,19 @@ class PostViewHolder(
                     binding.menu.isChecked = false
                 }
             }
-        }
 
+            root.setOnClickListener {
+                onInteractionListener.onOpen(post)
+            }
+
+        }
 
         binding.author.setOnClickListener {
             ////сворачивает текст
             binding.author.isSingleLine = !binding.author.isSingleLine
         }
+
+
     }
 
 

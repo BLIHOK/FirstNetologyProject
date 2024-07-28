@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken
 import ru.netology.netology1stproject.dto.Post
 
 
-class PostRepositoryFileImpl (private val context: Context) : PostRepository {
+class PostRepositoryFileImpl(private val context: Context) : PostRepository {
     private val gson = Gson()
 
     private val typeToken = TypeToken.getParameterized(List::class.java, Post::class.java).type
@@ -19,19 +19,27 @@ class PostRepositoryFileImpl (private val context: Context) : PostRepository {
             field = value
             sync()
         }
+
     private val data = MutableLiveData(posts)
 
+    init {
+
+    }
 
     init {
         val file = context.filesDir.resolve(fileName)
-        if (file.exists()){
+        if (file.exists()) {
             context.openFileInput(fileName).bufferedReader().use {
                 posts = gson.fromJson(it, typeToken)
                 nextId = posts.maxOfOrNull { it.id }?.inc() ?: 1
                 data.value = posts
+
             }
+
         }
     }
+
+
 
     override fun getAll(): LiveData<List<Post>> = data
 
@@ -74,11 +82,12 @@ class PostRepositoryFileImpl (private val context: Context) : PostRepository {
 
     }
 
-    private fun sync () {
+    private fun sync() {
         context.openFileOutput(fileName, Context.MODE_PRIVATE).bufferedWriter().use {
             it.write(gson.toJson(posts))
         }
 
     }
+
 
 }
