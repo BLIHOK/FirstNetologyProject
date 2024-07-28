@@ -30,7 +30,7 @@ class NewPostFragment : Fragment() {
         val viewModel: PostViewModel by activityViewModels()
 
         binding.edit.requestFocus()
-        binding.edit.setText(activity?.intent?.getStringExtra(Intent.EXTRA_TEXT))
+
         binding.save.setOnClickListener {
 
 

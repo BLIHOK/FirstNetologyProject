@@ -34,6 +34,7 @@ class AppActivity : AppCompatActivity() {
                     .show()
                 return@let
             }
+
             findNavController(R.id.nav_host).navigate(
                 R.id.action_feedFragment_to_newPostFragment2,
                 Bundle().apply {
