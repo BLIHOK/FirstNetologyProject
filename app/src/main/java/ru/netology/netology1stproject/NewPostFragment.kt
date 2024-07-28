@@ -32,8 +32,6 @@ class NewPostFragment : Fragment() {
         binding.edit.requestFocus()
 
         binding.save.setOnClickListener {
-
-
             if (binding.edit.text.isNotBlank()) {
                 viewModel.changeContentAndSave(binding.edit.text.toString())
                 findNavController().navigateUp()

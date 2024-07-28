@@ -70,12 +70,7 @@ class OnePostFragment : Fragment() {
             }
 
             override fun onOpen(post: Post) {
-                if (findNavController().currentDestination?.id != R.id.onePostFragment) {
-                    findNavController().navigate(
-                        R.id.action_feedFragment_to_onePostFragment,
-                        Bundle().apply { textArg = post.id.toString() }
-                    )
-                }
+                findNavController().currentDestination //nothing to do
             }
         })
 
