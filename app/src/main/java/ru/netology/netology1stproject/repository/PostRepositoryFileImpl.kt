@@ -39,21 +39,6 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
 
 
 
-    init {
-        val file = context.filesDir.resolve(fileName)
-        if (!file.exists()) {
-            context.openFileInput(fileName).bufferedReader().use {
-                posts = gson.fromJson(it, typeToken)
-                nextId = posts.maxOfOrNull { it.id }?.inc() ?: 1
-                data.value = ListOfTestPosts().posts
-
-            }
-//            posts.plus(ListOfTestPosts())
-        }
-    }
-
-
-
 
     override fun getAll(): LiveData<List<Post>> = data
 

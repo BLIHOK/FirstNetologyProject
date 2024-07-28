@@ -33,11 +33,6 @@ val viewModel: PostViewModel by activityViewModels()
     ): View {
         val binding = FragmentOnePostBinding.inflate(inflater, container, false)
 
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContentAndSave(result)
-        }
-
 
         val viewHolder = PostViewHolder(binding.post, object : onInteractionListener {
             override fun onLike(post: Post) {
