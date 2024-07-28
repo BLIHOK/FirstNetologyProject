@@ -66,21 +66,21 @@ class FeedFragment : Fragment() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-//                newPostLauncher.launch(post.content)
             }
 
             override fun playMedia(post: Post) {
                 val intent = Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse(post.video)
                 }
-                    startActivity(intent)
+                startActivity(intent)
 
             }
 
             override fun onOpen(post: Post) {
                 findNavController().navigate(
                     R.id.action_feedFragment_to_onePostFragment, Bundle().apply {
-                    textArg = post.id.toString() }
+                        textArg = post.id.toString()
+                    }
                 )
             }
         }
@@ -103,11 +103,13 @@ class FeedFragment : Fragment() {
 
         viewModel.edited.observe(viewLifecycleOwner) {
             if (it.id != 0L) {
-                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment2, Bundle().apply {
-                    textArg = it.content })
+                findNavController().navigate(
+                    R.id.action_feedFragment_to_newPostFragment2,
+                    Bundle().apply {
+                        textArg = it.content
+                    })
             }
         }
-
 
         return binding.root
     }

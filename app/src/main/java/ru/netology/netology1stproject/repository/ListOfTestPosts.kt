@@ -4,7 +4,7 @@ import ru.netology.netology1stproject.dto.Post
 private var nextId = 1L
 
 class ListOfTestPosts {
-    val posts = listOf(
+    var posts = listOf(
     Post(
     id = nextId++,
     author = "Нетология. Университет интернет-профессий будущего",
