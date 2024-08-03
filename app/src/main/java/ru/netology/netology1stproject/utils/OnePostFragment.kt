@@ -8,17 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import ru.netology.netology1stproject.NewPostFragment.Companion.textArg
-import ru.netology.netology1stproject.NewPostResultContract
 import ru.netology.netology1stproject.R
 import ru.netology.netology1stproject.adapter.PostViewHolder
 import ru.netology.netology1stproject.adapter.onInteractionListener
 import ru.netology.netology1stproject.databinding.FragmentOnePostBinding
 import ru.netology.netology1stproject.dto.Post
-import ru.netology.netology1stproject.dto.PostViewModel
+import ru.netology.netology1stproject.viewmodel.PostViewModel
 
 class OnePostFragment : Fragment() {
 
@@ -70,7 +67,7 @@ class OnePostFragment : Fragment() {
             }
 
             override fun onOpen(post: Post) {
-                findNavController().currentDestination //nothing to do
+                //nothing to do
             }
         })
 

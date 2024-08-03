@@ -1,11 +1,15 @@
-package ru.netology.netology1stproject.dto
+package ru.netology.netology1stproject.viewmodel
 
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import ru.netology.netology1stproject.repository.PostRepository
-import ru.netology.netology1stproject.repository.PostRepositoryFileImpl
+import ru.netology.netology1stproject.dao.PostDao
+import ru.netology.netology1stproject.dao.PostDaoFileImpl
+import ru.netology.netology1stproject.dto.Post
+import ru.netology.nmedia.db.AppDb
+import ru.netology.nmedia.repository.PostRepository
+import ru.netology.nmedia.repository.PostRepositorySQLiteImpl
 
 
 private val empty = Post(
@@ -22,7 +26,9 @@ private val empty = Post(
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: PostRepository = PostRepositoryFileImpl(application)
+    private val repository: PostRepository = PostRepositorySQLiteImpl(
+        AppDb.getInstance(application).postDao
+    )
 
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
