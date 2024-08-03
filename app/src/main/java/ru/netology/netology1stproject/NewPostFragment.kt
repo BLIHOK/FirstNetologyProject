@@ -40,7 +40,23 @@ class NewPostFragment : Fragment() {
                 findNavController().navigateUp()
             }
         }
-                return binding.root
+
+
+        val sharedPreferences = activity?.getSharedPreferences("text", Context.MODE_PRIVATE)
+
+        val editor = sharedPreferences?.edit()
+        editor?.putString("textValue",Bundle().apply {
+            textArg = post.id.toString()
+        }.textArg
+        )
+        editor?.apply()
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            findNavController().popBackStack()
+        }
+
+
+        return binding.root
     }
 
 
@@ -50,4 +66,7 @@ class NewPostFragment : Fragment() {
 
 
 }
+
+
+
 
