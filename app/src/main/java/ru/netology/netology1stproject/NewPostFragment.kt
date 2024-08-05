@@ -23,20 +23,22 @@ class NewPostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentNewPostBinding.inflate(inflater, container, false)
+
         arguments?.textArg.let(binding.edit::setText)
 
         val sharedPreferences = activity?.getSharedPreferences("text", Context.MODE_PRIVATE)
+
 
         val viewModel: PostViewModel by activityViewModels()
 
         binding.edit.requestFocus()
 
         binding.save.setOnClickListener {
-            if (binding.edit.text.isNotBlank()) {
+//            if (binding.edit.text.isNotBlank()) {
                 viewModel.changeContentAndSave(binding.edit.text.toString())
                 sharedPreferences?.edit()?.remove("textValue")?.apply()////
                 findNavController().navigateUp()
-            }
+//            }
         }
 
         if (binding.edit.text.toString() == arguments?.textArg){
@@ -49,9 +51,14 @@ class NewPostFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        val textValue = sharedPreferences?.getString("textValue", "")
 
-        binding.edit.setText(textValue)
+        val textValue = sharedPreferences?.getString("textValue", "")
+        if (binding.edit.id == R.id.edit) {
+
+
+                    binding.edit.setText(textValue)
+
+        }
 
         return binding.root
     }

@@ -107,6 +107,7 @@ class FeedFragment : Fragment() {
                         textArg = it.content
                     })
             }
+
         }
 
         return binding.root
