@@ -4,8 +4,6 @@ package ru.netology.netology1stproject.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import ru.netology.netology1stproject.dao.PostDao
-import ru.netology.netology1stproject.dao.PostDaoFileImpl
 import ru.netology.netology1stproject.dto.Post
 import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.repository.PostRepository
@@ -51,5 +49,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun shareById(id: Long) = repository.shareById(id)
     fun removeById(id: Long) = repository.removeById(id)
 
+    fun cancelEdit() {
+        edited.value = empty
+    }
 }
 

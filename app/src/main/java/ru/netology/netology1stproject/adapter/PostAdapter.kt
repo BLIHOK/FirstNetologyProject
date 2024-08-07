@@ -43,6 +43,7 @@ class PostViewHolder(
     private val onInteractionListener: onInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
+
     fun bind(post: Post) {
         with(binding) {
             author.text = post.author
@@ -98,15 +99,12 @@ class PostViewHolder(
             root.setOnClickListener {
                 onInteractionListener.onOpen(post)
             }
-
         }
 
         binding.author.setOnClickListener {
             ////сворачивает текст
             binding.author.isSingleLine = !binding.author.isSingleLine
         }
-
-
     }
 
 
@@ -115,8 +113,5 @@ class PostViewHolder(
 
         override fun areContentsTheSame(oldItem: Post, newItem: Post) =
             oldItem == newItem
-
     }
-
-
 }

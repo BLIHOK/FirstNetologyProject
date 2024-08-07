@@ -19,9 +19,6 @@ import ru.netology.netology1stproject.viewmodel.PostViewModel
 
 class OnePostFragment : Fragment() {
 
-    //    val viewModel: PostViewModel by viewModels(
-//        ownerProducer = ::requireParentFragment
-//    )
     val viewModel: PostViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -90,9 +87,6 @@ class OnePostFragment : Fragment() {
             }
             viewHolder.bind(post)
         }
-
-
-
         return binding.root
     }
 }

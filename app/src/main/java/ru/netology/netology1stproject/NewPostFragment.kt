@@ -34,6 +34,10 @@ class NewPostFragment : Fragment() {
 
         val viewModel: PostViewModel by activityViewModels()
 
+        if (binding.edit.id == 0){
+            binding.edit.id = -1
+        }
+
         binding.edit.requestFocus()
 
         binding.save.setOnClickListener {
@@ -44,12 +48,12 @@ class NewPostFragment : Fragment() {
             }
         }
 
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                val textToSave = binding.edit.text.toString()
-                sharedPreferences?.edit()?.putString("textValue", textToSave)?.apply()
-                findNavController().navigateUp()
-            }
-
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            val textToSave = binding.edit.text.toString()
+            viewModel.cancelEdit() //<----
+            sharedPreferences?.edit()?.putString("textValue", textToSave)?.apply()
+            findNavController().navigateUp()
+        }
             return binding.root
         }
 
