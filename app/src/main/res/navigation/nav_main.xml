@@ -6,7 +6,7 @@
     app:startDestination="@id/feedFragment">
     <fragment
         android:id="@+id/feedFragment"
-        android:name="ru.netology.netology1stproject.FeedFragment"
+        android:name="ru.netology.netology1stproject.activity.FeedFragment"
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed" >
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/newPostFragment"
-        android:name="ru.netology.netology1stproject.NewPostFragment"
+        android:name="ru.netology.netology1stproject.activity.NewPostFragment"
         android:label="NewPostFragment" />
 
 

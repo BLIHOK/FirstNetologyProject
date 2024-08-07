@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import ru.netology.netology1stproject.NewPostFragment.Companion.textArg
+import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.R
 import ru.netology.netology1stproject.adapter.PostViewHolder
 import ru.netology.netology1stproject.adapter.onInteractionListener

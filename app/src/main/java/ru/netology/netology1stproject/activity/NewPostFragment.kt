@@ -1,4 +1,4 @@
-package ru.netology.netology1stproject
+package ru.netology.netology1stproject.activity
 
 
 import android.content.Context

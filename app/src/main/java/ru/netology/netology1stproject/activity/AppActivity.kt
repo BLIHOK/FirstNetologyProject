@@ -1,4 +1,4 @@
-package ru.netology.netology1stproject
+package ru.netology.netology1stproject.activity
 
 
 import android.content.Intent
@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
-import ru.netology.netology1stproject.NewPostFragment.Companion.textArg
+import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
+import ru.netology.netology1stproject.R
 import ru.netology.netology1stproject.databinding.ActivityAppBinding
 
 
