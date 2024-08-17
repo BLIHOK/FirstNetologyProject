@@ -76,8 +76,6 @@ dependencies {
 
     implementation 'androidx.preference:preference-ktx:1.2.1'
 
-    apply plugin: 'kotlin-android'
-    apply plugin: 'kotlin-kapt'
 
     implementation "androidx.room:room-runtime:$room_ver"
     kapt "androidx.room:room-compiler:$room_ver"
