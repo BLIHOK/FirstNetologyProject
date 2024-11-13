@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
-
+    id 'com.google.gms.google-services'
 
 }
 
@@ -11,7 +11,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "ru.netology.nmedia"
+        applicationId "ru.netology.netology1stproject"
         minSdk 29
         targetSdk 34
         versionCode 1
@@ -42,6 +42,8 @@ dependencies {
     implementation 'androidx.activity:activity:1.9.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+    implementation platform('com.google.firebase:firebase-bom:33.5.1')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 
     def activity_version = "1.8.2"
     def lifecycle_version = "2.7.0"
@@ -51,7 +53,8 @@ dependencies {
     def fragment_version = "1.7.1"
     def gson_version = "2.11.0"
     def room_ver = "2.6.1"
-
+    def play_services_base_version = "18.5.0"
+    implementation("com.google.android.gms:play-services-base:$play_services_base_version")
 
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
@@ -79,7 +82,6 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_ver"
     kapt "androidx.room:room-compiler:$room_ver"
-
 
 
 }

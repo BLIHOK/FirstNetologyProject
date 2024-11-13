@@ -4,12 +4,20 @@ package ru.netology.netology1stproject.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.Constants.TAG
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingRegistrar
+import com.google.firebase.messaging.FirebaseMessagingService
+import ru.netology.netology1stproject.FCMService
 import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.NewPostResultContract
 import ru.netology.netology1stproject.R
@@ -112,6 +120,8 @@ class FeedFragment : Fragment() {
             }
 
         }
+
+
 
         return binding.root
     }
