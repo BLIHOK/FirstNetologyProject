@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
@@ -23,6 +23,9 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew build
+
+      - name: List Files (Debug)
+        run: ls -R app/build/outputs/apk/
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
