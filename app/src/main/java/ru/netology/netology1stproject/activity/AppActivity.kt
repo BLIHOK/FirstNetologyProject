@@ -1,7 +1,10 @@
 package ru.netology.netology1stproject.activity
 
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -12,22 +15,21 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
-import ru.netology.netology1stproject.FCMService
-import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.R
+import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.databinding.ActivityAppBinding
 
 
 class AppActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        requestNotificationsPermission()
+
         val binding = ActivityAppBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-
         intent?.let {
             if (it.action != Intent.ACTION_SEND) {
                 return@let
@@ -51,10 +53,8 @@ class AppActivity : AppCompatActivity() {
             )
         }
 
-
         getFCMToken()
         checkGoogleapiAvailability()
-
     }
 
     private fun getFCMToken() {
@@ -69,17 +69,35 @@ class AppActivity : AppCompatActivity() {
             }
         }
     }
-    private fun checkGoogleapiAvailability(){
-        with(GoogleApiAvailability.getInstance()){
+
+    private fun checkGoogleapiAvailability() {
+        with(GoogleApiAvailability.getInstance()) {
             val code = isGooglePlayServicesAvailable(this@AppActivity)
-            if (code ==ConnectionResult.SUCCESS) {
+            if (code == ConnectionResult.SUCCESS) {
                 return@with
             }
-            if(isUserResolvableError(code)){
+            if (isUserResolvableError(code)) {
                 getErrorDialog(this@AppActivity, code, 9000)?.show()
                 return
             }
             Toast.makeText(this@AppActivity, "Google Api Unavailable", Toast.LENGTH_SHORT).show()
         }
+        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+            println(it)
+        }
+    }
+
+    private fun requestNotificationsPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+            return
+        }
+
+        val permission = Manifest.permission.POST_NOTIFICATIONS
+
+        if (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+
+        requestPermissions(arrayOf(permission), 1)
     }
 }

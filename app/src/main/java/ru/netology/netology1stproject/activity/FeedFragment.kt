@@ -4,23 +4,15 @@ package ru.netology.netology1stproject.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.Constants.TAG
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingRegistrar
-import com.google.firebase.messaging.FirebaseMessagingService
-import ru.netology.netology1stproject.FCMService
-import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
-import ru.netology.netology1stproject.NewPostResultContract
 import ru.netology.netology1stproject.R
+import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.adapter.PostAdapter
 import ru.netology.netology1stproject.adapter.onInteractionListener
 import ru.netology.netology1stproject.databinding.FragmentFeedBinding
@@ -30,30 +22,20 @@ import ru.netology.netology1stproject.viewmodel.PostViewModel
 
 class FeedFragment : Fragment() {
 
+    val viewModel: PostViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
-
-
-//        val viewModel: PostViewModel by viewModels (
-//            ownerProducer = ::requireParentFragment
-//        )
-        val viewModel: PostViewModel by activityViewModels()
-
-
-        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
-            result ?: return@registerForActivityResult
-            viewModel.changeContentAndSave(result)
-        }
-
-
         val adapter = PostAdapter(object : onInteractionListener {
+
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
+            }
+
+            override fun unLike(post: Post) {
+                viewModel.unlikeById(post.id)
             }
 
             override fun onShare(post: Post) {
@@ -89,38 +71,43 @@ class FeedFragment : Fragment() {
                 findNavController().navigate(
                     R.id.action_feedFragment_to_onePostFragment, Bundle().apply {
                         textArg = post.id.toString()
-                    }
-                )
+                    })
             }
-        }
-        )
+        })
 
-
-        binding.list.adapter = adapter
-        viewModel.data.observe(viewLifecycleOwner) { posts: List<Post> ->
-            val newPost = adapter.currentList.size < posts.size && adapter.currentList.size > 0
-            adapter.submitList(posts) {
-                if (newPost) {
-                    binding.list.smoothScrollToPosition(0)
-                }
+        with(binding) {
+            list.adapter = adapter
+            viewModel.data.observe(viewLifecycleOwner) { state ->
+                adapter.submitList(state.posts)
+                progress?.isVisible = state.loading
+                errorGroup?.isVisible = state.error
+                emptyText?.isVisible = state.empty
             }
-        }
 
-        binding.save.setOnClickListener {
-            findNavController().navigate(R.id.newPostFragment)
+            retryButton?.setOnClickListener {
+                viewModel.loadPosts()
+            }
+
+            save.setOnClickListener {
+                findNavController().navigate(R.id.newPostFragment)
+            }
         }
 
         viewModel.edited.observe(viewLifecycleOwner) {
             if (it.id != 0L) {
                 findNavController().navigate(
-                    R.id.action_feedFragment_to_newPostFragment2,
-                    Bundle().apply {
+                    R.id.action_feedFragment_to_newPostFragment2, Bundle().apply {
                         textArg = it.content
                     })
             }
-
         }
 
+        binding.swiperefresh?.setOnRefreshListener {
+            viewModel.loadPosts()
+
+            // Hide swipe to refresh icon animation
+            binding.swiperefresh.isRefreshing = false
+        }
 
 
         return binding.root

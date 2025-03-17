@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="ru.netology.netology1stproject"
-    >
+    package="ru.netology.netology1stproject">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -13,51 +15,38 @@
         android:roundIcon="@mipmap/ic_avatar_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstNetologyProject"
+        android:usesCleartextTraffic="${usesCleartextTraffic}"
         tools:targetApi="31">
-<service
-    android:name="ru.netology.netology1stproject.FCMService"
-    android:exported="false">
-    <intent-filter>
-        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-    </intent-filter>
-</service>
 
-
+        <service
+            android:name="ru.netology.netology1stproject.service.FCMService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <activity
             android:name=".activity.AppActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="text/plain" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-
-
                 <data android:scheme="*" />
-
                 <data android:mimeType="video/*" />
-
             </intent-filter>
-
         </activity>
-
-
     </application>
-
-
 </manifest>

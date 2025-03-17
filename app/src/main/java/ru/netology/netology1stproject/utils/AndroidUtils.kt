@@ -35,7 +35,6 @@ object AndroidUtils {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-
     fun View.focusAndShowKeyboard() {
         /**
          * This is to be called when the window already has focus.

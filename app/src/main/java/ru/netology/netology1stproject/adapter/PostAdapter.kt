@@ -16,6 +16,7 @@ import ru.netology.netology1stproject.utils.AndroidUtils
 
 interface onInteractionListener {
     fun onLike(post: Post)
+    fun unLike(post: Post)
     fun onShare(post: Post)
     fun onRemove(post: Post)
     fun onEdit(post: Post)
@@ -43,7 +44,6 @@ class PostViewHolder(
     private val onInteractionListener: onInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
-
     fun bind(post: Post) {
         with(binding) {
             author.text = post.author
@@ -56,6 +56,10 @@ class PostViewHolder(
             likes.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
+            likes.setOnClickListener {
+                onInteractionListener.unLike(post)
+            }
+
             shares.isChecked = post.shareByMe
 
             shares.setOnClickListener {
@@ -68,7 +72,6 @@ class PostViewHolder(
             videoContent.setOnClickListener {
                 onInteractionListener.playMedia(post)
             }
-
 
             menu.setOnClickListener {
                 menu.isChecked = true

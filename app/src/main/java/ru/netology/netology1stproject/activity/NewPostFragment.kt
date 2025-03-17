@@ -11,11 +11,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.netology1stproject.databinding.FragmentNewPostBinding
+import ru.netology.netology1stproject.utils.AndroidUtils
 import ru.netology.netology1stproject.utils.StringArg
 import ru.netology.netology1stproject.viewmodel.PostViewModel
 
 
 class NewPostFragment : Fragment() {
+
+    companion object {
+        var Bundle.textArg: String? by StringArg
+    }
+
+    private val viewModel: PostViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,8 +39,6 @@ class NewPostFragment : Fragment() {
             binding.edit.setText(textValue)
         }
 
-        val viewModel: PostViewModel by activityViewModels()
-
         if (binding.edit.id == 0){
             binding.edit.id = -1
         }
@@ -44,23 +49,23 @@ class NewPostFragment : Fragment() {
             if (binding.edit.text.isNotBlank()) {
                 viewModel.changeContentAndSave(binding.edit.text.toString())
                 sharedPreferences?.edit()?.remove("textValue")?.apply()////
+                AndroidUtils.HideKeyboard(requireView())
                 findNavController().navigateUp()
             }
+        }
+        viewModel.postCreated.observe(viewLifecycleOwner) {
+            viewModel.loadPosts()
+            findNavController().navigateUp()
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             val textToSave = binding.edit.text.toString()
-            viewModel.cancelEdit() //<----
+            viewModel.cancelEdit()
             sharedPreferences?.edit()?.putString("textValue", textToSave)?.apply()
             findNavController().navigateUp()
         }
             return binding.root
         }
-
-
-    companion object {
-        var Bundle.textArg: String? by StringArg
-    }
 }
 
 

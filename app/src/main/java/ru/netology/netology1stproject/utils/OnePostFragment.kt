@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.R
+import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.adapter.PostViewHolder
 import ru.netology.netology1stproject.adapter.onInteractionListener
 import ru.netology.netology1stproject.databinding.FragmentOnePostBinding
@@ -32,6 +32,10 @@ class OnePostFragment : Fragment() {
         val viewHolder = PostViewHolder(binding.post, object : onInteractionListener {
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
+            }
+
+            override fun unLike(post: Post) {
+                viewModel.unlikeById(post.id)
             }
 
             override fun onShare(post: Post) {
@@ -81,7 +85,7 @@ class OnePostFragment : Fragment() {
 
         val id = arguments?.textArg?.toLong() ?: -1
         viewModel.data.observe(viewLifecycleOwner) { posts ->
-            val post = posts.find { it.id == id } ?: run {
+            val post = posts.posts.find { it.id == id } ?: run {
                 findNavController().navigateUp()
                 return@observe
             }
