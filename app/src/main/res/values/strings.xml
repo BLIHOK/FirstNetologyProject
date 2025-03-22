@@ -35,21 +35,21 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    <string name="hello">Hello World!</string>
-    <string name="description_post_author_avatar">Post author avatar</string>
-    <string name="description_post_menu">Post menu</string>
-    <string name="description_post_like">Like</string>
-    <string name="description_post_share">Share</string>
-    <string name="description_post_save">Save</string>
-    <string name="chooser_share_post">Share post</string>
-    <string name="add_post">Add post</string>
-    <string name="retry_loading">Retry</string>
-    <string name="empty_posts">There are no posts.\nIf you create a new post, it will appear here</string>
-    <string name="error_loading">Something went wrong. Try again later</string>
-    <string name="save">Save</string>
-    <string name="google_play_unavailable">Google Api Unavailable</string>
-    <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
-    <string name="channel_remote_name">Server notifications</string>
-    <string name="channel_remote_description">Notifications from remote server</string>
+    <string name="hello" translatable="false">Hello World!</string>
+    <string name="description_post_author_avatar" translatable="false">Post author avatar</string>
+    <string name="description_post_menu" translatable="false">Post menu</string>
+    <string name="description_post_like" translatable="false">Like</string>
+    <string name="description_post_share" translatable="false">Share</string>
+    <string name="description_post_save" translatable="false">Save</string>
+    <string name="chooser_share_post" translatable="false">Share post</string>
+    <string name="add_post" translatable="false">Add post</string>
+    <string name="retry_loading" translatable="false">Retry</string>
+    <string name="empty_posts" translatable="false">There are no posts.\nIf you create a new post, it will appear here</string>
+    <string name="error_loading" translatable="false">Something went wrong. Try again later</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="google_play_unavailable" translatable="false">Google Api Unavailable</string>
+    <string name="notification_user_liked" translatable="false">User %1$s liked %2$s\'s post</string>
+    <string name="channel_remote_name" translatable="false">Server notifications</string>
+    <string name="channel_remote_description" translatable="false">Notifications from remote server</string>
 
 </resources>
