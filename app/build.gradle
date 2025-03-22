@@ -1,14 +1,17 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'com.google.gms.google-services'
+
 }
 
 android {
     namespace 'ru.netology.netology1stproject'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
-        applicationId "ru.netology.nmedia"
+        applicationId "ru.netology.netology1stproject"
         minSdk 29
         targetSdk 34
         versionCode 1
@@ -23,6 +26,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders.usesCleartextTraffic = false
+        }
+        debug {
+            manifestPlaceholders.usesCleartextTraffic = true
         }
     }
     compileOptions {
@@ -35,20 +42,59 @@ android {
 }
 
 dependencies {
-    def activity_version = "1.8.2"
-    def lifecycle_version = "2.7.0"
+    def activity_version = "1.10.1"
+    def lifecycle_version = "2.8.7"
     def arch_version = "2.2.0"
+    def recyclerview_version = "1.4.0"
+    def fragment_version = "1.8.6"
+    def gson_version = "2.11.0"
+    def room_ver = "2.6.1"
+    def play_services_base_version = "18.5.0"
+    def core_ktx_version = "1.15.0"
+    def appcompat_version = "1.7.0"
+    def material_version = "1.12.0"
+    def constraintlayout_version = "2.2.1"
+    def junit_version = "4.13.2"
+    def junit_test_version = "1.2.1"
+    def espresso_version = "3.6.1"
+    def activity_ktx_version = "1.10.1"
+    def navigation_fragment_ktx_version = "2.8.8"
+    def navigation_ui_ktx_version = "2.8.8"
+    def firebase_bom_version = "33.10.0"
+    def preference_ktx_version = "1.2.1"
+    def okhttp_bom_version = "4.12.0"
+    def swipe_refresh_layout_version = "1.2.0-beta01"
 
+
+    implementation "androidx.activity:activity-ktx:$activity_ktx_version"
+    implementation "androidx.activity:activity:$activity_ktx_version"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     implementation "androidx.activity:activity-ktx:$activity_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "androidx.room:room-runtime:$room_ver"
+    kapt "androidx.room:room-compiler:$room_ver"
     testImplementation "androidx.arch.core:core-testing:$arch_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$junit_test_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation "androidx.preference:preference-ktx:$preference_ktx_version"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_fragment_ktx_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_ui_ktx_version"
+    implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
+    implementation "com.google.firebase:firebase-messaging-ktx"
+    implementation("com.google.android.gms:play-services-base:$play_services_base_version")
 
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation platform("com.squareup.okhttp3:okhttp-bom:$okhttp_bom_version")
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_layout_version")
 }

@@ -8,6 +8,11 @@
     <string name="ic_watches_description" translatable="false">Watches</string>
     <string name="ic_likes_description" translatable="false">Likes</string>
     <string name="ic_shares_description" translatable="false">Shares</string>
+    <string name="menu_remove">Remove</string>
+    <string name="post_text">Post text</string>
+    <string name="menu_edit">Edit</string>
+    <string name="error_empty_content">Content can\'t be empty</string>
+    <string name="choose_share_post" translatable="false">Some new content to share</string>
 
     <string name="content" translatable="false">Понятное меню, удобный поиск, лаконичный дизайн — пользоваться такими сайтами и приложениями одно удовольствие. Удобными их делают UX/UI-дизайнеры.
 
@@ -21,7 +26,30 @@
 В подарок все участники получат чек-лист «Фриланс или удалёнка: что выбрать».
 
 Регистрируйтесь, чтобы на практике познакомиться с задачами UX/UI-дизайнеров и понять, с чего начать карьеру в сфере: https://netolo.gy/cJ3N</string>
+    <string name="save_post" translatable="false">Save post</string>
+    <string name="edit_icon" translatable="false">edit icon</string>
+    <string name="close_edit" translatable="false">Close edit</string>
+    <string name="netology_banner">Netology</string>
+    <string name="edit_message_banner">Edit message</string>
+    <string name="press_to_start_video">Press to start video</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-
+    <string name="hello" translatable="false">Hello World!</string>
+    <string name="description_post_author_avatar" translatable="false">Post author avatar</string>
+    <string name="description_post_menu" translatable="false">Post menu</string>
+    <string name="description_post_like" translatable="false">Like</string>
+    <string name="description_post_share" translatable="false">Share</string>
+    <string name="description_post_save" translatable="false">Save</string>
+    <string name="chooser_share_post" translatable="false">Share post</string>
+    <string name="add_post" translatable="false">Add post</string>
+    <string name="retry_loading" translatable="false">Retry</string>
+    <string name="empty_posts" translatable="false">There are no posts.\nIf you create a new post, it will appear here</string>
+    <string name="error_loading" translatable="false">Something went wrong. Try again later</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="google_play_unavailable" translatable="false">Google Api Unavailable</string>
+    <string name="notification_user_liked" translatable="false">User %1$s liked %2$s\'s post</string>
+    <string name="channel_remote_name" translatable="false">Server notifications</string>
+    <string name="channel_remote_description" translatable="false">Notifications from remote server</string>
 
 </resources>
