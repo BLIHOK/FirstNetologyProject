@@ -70,7 +70,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/barrier_top"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/post_card"></androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/post_card" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <EditText

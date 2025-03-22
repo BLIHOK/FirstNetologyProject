@@ -19,7 +19,7 @@ private val empty = Post(
     content = "",
     author = "",
     likedByMe = false,
-    likeCount = 0,
+    likes = 0,
     shareByMe = false,
     shareCount = 0,
     watchCount = 0,
@@ -57,12 +57,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun changeContentAndSave(content: String) {
-        edited.value?.let {
-            val text = content.trim()
-            if (content != it.content) {
-                repository.save(it.copy(content = content))
+        thread {
+            edited.value?.let {
+                content.trim()
+                if (content != it.content) {
+                    repository.save(it.copy(content = content))
+                }
+                edited.value = empty
             }
-            edited.value = empty
         }
     }
 
@@ -71,11 +73,17 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun likeById(id: Long) {
-        thread { repository.likeById(id) }
+        thread {
+            repository.likeById(id)
+            loadPosts()
+        }
     }
 
     fun unlikeById(id: Long) {
-        thread { repository.unlikeById(id) }
+        thread {
+            repository.unlikeById(id)
+            loadPosts()
+        }
     }
 
     fun shareById(id: Long) {
@@ -103,7 +111,5 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun cancelEdit() {
         edited.value = empty
     }
-
-
 }
 

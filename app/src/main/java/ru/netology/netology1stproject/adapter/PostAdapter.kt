@@ -49,15 +49,17 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            likes.text = AndroidUtils.changeCountersImagin(post.likeCount)
+            likes.text = AndroidUtils.changeCountersImagin(post.likes)
             shares.text = AndroidUtils.changeCountersImagin(post.shareCount)
             watchesCounter.text = AndroidUtils.changeCountersImagin(post.watchCount)
             likes.isChecked = post.likedByMe
-            likes.setOnClickListener {
-                onInteractionListener.onLike(post)
-            }
+
             likes.setOnClickListener {
                 onInteractionListener.unLike(post)
+            }
+
+            likes.setOnClickListener {
+                onInteractionListener.onLike(post)
             }
 
             shares.isChecked = post.shareByMe
