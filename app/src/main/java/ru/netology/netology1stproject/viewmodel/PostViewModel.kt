@@ -63,7 +63,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
                 if (content != it.content) {
                     repository.save(it.copy(content = content))
                 }
-                edited.value = empty
+                _postCreated.postValue(Unit)
+                edited.postValue(empty)
             }
         }
     }

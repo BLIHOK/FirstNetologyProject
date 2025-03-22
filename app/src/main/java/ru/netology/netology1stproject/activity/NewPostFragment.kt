@@ -50,7 +50,6 @@ class NewPostFragment : Fragment() {
                 viewModel.changeContentAndSave(binding.edit.text.toString())
                 sharedPreferences?.edit()?.remove("textValue")?.apply()////
                 AndroidUtils.HideKeyboard(requireView())
-                findNavController().navigateUp()
             }
         }
         viewModel.postCreated.observe(viewLifecycleOwner) {
