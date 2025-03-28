@@ -4,5 +4,6 @@
     <dimen name="common_spacing2">16dp</dimen>
     <dimen name="post_avatar_size">64dp</dimen>
     <dimen name="icon_size">48dp</dimen>
+    <dimen name="wide_icon_size">76dp</dimen>
     <dimen name="menu_size">24dp</dimen>
 </resources>
