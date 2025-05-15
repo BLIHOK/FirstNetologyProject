@@ -2,11 +2,15 @@ package ru.netology.nmedia.repository
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import ru.netology.netology1stproject.dto.Post
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
@@ -22,68 +26,164 @@ class PostRepositoryImpl : PostRepository {
         private val jsonType = "application/json".toMediaType()
     }
 
-    override fun getAll(): List<Post> {
+    override fun getAllAsync(callback: PostRepository.GetAllCallback) {
         val request: Request = Request.Builder()
             .url("${BASE_URL}/api/slow/posts")
             .build()
 
-        return client.newCall(request)
-            .execute()
-            .let { it.body?.string() ?: throw RuntimeException("body is null") }
-            .let { gson.fromJson(it, typeToken.type) }
+//        println("1 ${Thread.currentThread().name}}")
+        client.newCall(request)
+            .enqueue(object : Callback {
+                override fun onResponse(call: Call, response: Response) {
+                    try {
+//                        println("2 ${Thread.currentThread().name}}")
+                        val posts =
+                            response.body?.string() ?: throw RuntimeException("body is null")
+                        callback.onSuccess(gson.fromJson(posts, typeToken.type))
+                    } catch (e: Exception) {
+                        callback.onError(e)
+                    }
+                }
+
+                override fun onFailure(call: Call, e: IOException) {
+                    callback.onError(e)
+                }
+            })
+//        println("3 ${Thread.currentThread().name}}")
     }
 
-    override fun likeById(id: Long) {
-        val request: Request = Request.Builder()
+
+    override fun likeByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
+        val request = Request.Builder()
             .post("".toRequestBody())
-            .url("${BASE_URL}/api/slow/posts/$id/likes")
+            .url("${BASE_URL}/api/posts/$id/likes")
             .build()
 
-        client.newCall(request)
-            .execute()
-            .close()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                try {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError(IOException("Ошибка: код ${response.code}"))
+                    }
+                } catch (e: Exception) {
+                    callback.onError(e)
+                } finally {
+                    response.close()
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                callback.onError(e)
+            }
+        })
     }
 
-    override fun unlikeById(id: Long) {
-        val request: Request = Request.Builder()
+    override fun unlikeByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
+        val request = Request.Builder()
             .delete()
-            .url("${BASE_URL}/api/slow/posts/$id/likes")
+            .url("${BASE_URL}/api/posts/$id/likes")
             .build()
 
-        client.newCall(request)
-            .execute()
-            .close()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                try {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError(IOException("Ошибка: код ${response.code}"))
+                    }
+                } catch (e: Exception) {
+                    callback.onError(e)
+                } finally {
+                    response.close()
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                callback.onError(e)
+            }
+        })
     }
 
-    override fun shareById(id: Long) {
+    override fun shareByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
         val request: Request = Request.Builder()
             .url("${BASE_URL}/api/slow/posts/$id")
             .build()
 
-        client.newCall(request)
-            .execute()
-            .close()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                try {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError(IOException("Ошибка: код ${response.code}"))
+                    }
+                } catch (e: Exception) {
+                    callback.onError(e)
+                } finally {
+                    response.close()
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                callback.onError(e)
+            }
+        })
     }
 
-    override fun save(post: Post) {
+    override fun saveAsync(post: Post, callback: PostRepository.SingleOperationCallback) {
         val request: Request = Request.Builder()
             .post(gson.toJson(post).toRequestBody(jsonType))
             .url("${BASE_URL}/api/posts")
             .build()
 
-        client.newCall(request)
-            .execute()
-            .close()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                try {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError(IOException("Ошибка: код ${response.code}"))
+                    }
+                } catch (e: Exception) {
+                    callback.onError(e)
+                } finally {
+                    response.close()
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                callback.onError(e)
+            }
+        })
     }
 
-    override fun removeById(id: Long) {
+    override fun removeByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
         val request: Request = Request.Builder()
             .delete()
             .url("${BASE_URL}/api/posts/$id")
             .build()
 
-        client.newCall(request)
-            .execute()
-            .close()
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                try {
+                    if (response.isSuccessful) {
+                        callback.onSuccess()
+                    } else {
+                        callback.onError(IOException("Ошибка: код ${response.code}"))
+                    }
+                } catch (e: Exception) {
+                    callback.onError(e)
+                } finally {
+                    response.close()
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                callback.onError(e)
+            }
+        })
     }
 }
