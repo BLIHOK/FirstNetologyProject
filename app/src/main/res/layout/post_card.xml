@@ -7,7 +7,7 @@
     android:padding="@dimen/common_spacing">
 
     <ImageView
-        android:id="@+id/avatar"
+        android:id="@+id/authorAvatar"
         android:layout_width="@dimen/post_avatar_size"
         android:layout_height="@dimen/post_avatar_size"
         android:contentDescription="@string/ic_avatar_description"
@@ -31,12 +31,12 @@
         android:text="@string/postTitle"
         android:textSize="16sp"
 
-        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintBottom_toBottomOf="@id/authorAvatar"
         app:layout_constraintBottom_toTopOf="@id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toTopOf="@+id/avatar" />
+        app:layout_constraintStart_toEndOf="@+id/authorAvatar"
+        app:layout_constraintTop_toTopOf="@+id/authorAvatar" />
 
     <TextView
         android:id="@+id/published"
@@ -45,7 +45,7 @@
         android:layout_marginStart="@dimen/common_spacing"
         android:layout_marginTop="4dp"
         android:text="@string/current_time"
-        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintStart_toEndOf="@id/authorAvatar"
         app:layout_constraintTop_toBottomOf="@+id/author"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="avatar, published, menu" />
+        app:constraint_referenced_ids="authorAvatar, published, menu" />
 
     <TextView
         android:id="@+id/content"
@@ -78,7 +78,7 @@
         android:layout_marginEnd="@dimen/common_spacing2"
         android:text="@string/content"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="author, published, avatar"
+        app:constraint_referenced_ids="author, published, authorAvatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/published"
@@ -94,12 +94,27 @@
         android:contentDescription="@string/press_to_start_video"
         android:foreground="@mipmap/ic_rick_astley"
         android:text="@string/choose_share_post"
+        android:visibility="visible"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="author, published, avatar"
+        app:constraint_referenced_ids="author, published, authorAvatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
         app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+        android:id="@+id/attachment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="author, published, authorAvatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintVertical_chainStyle="packed" />
+
     />
 
     <androidx.constraintlayout.widget.Barrier

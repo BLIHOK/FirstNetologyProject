@@ -8,6 +8,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.netology.netology1stproject.R
 import ru.netology.netology1stproject.databinding.PostCardBinding
 import ru.netology.netology1stproject.dto.Post
@@ -47,6 +48,25 @@ class PostViewHolder(
     fun bind(post: Post) {
         with(binding) {
             author.text = post.author
+
+            val avatarUrl = "http://10.0.2.2:9999/avatars/${post.authorAvatar}"
+            Glide.with(root)
+                .load(avatarUrl)
+                .placeholder(R.drawable.ic_redhearth_foreground)
+                .error(R.drawable.ic_close_banner)
+                .timeout(10_000)
+                .circleCrop()
+                .into(authorAvatar)
+
+            val attachmentUrl = "http://10.0.2.2:9999/images/${post.attachment}"
+            attachment.visibility = View.VISIBLE
+            Glide.with(binding.root)
+                .load(attachmentUrl)
+                .placeholder(R.drawable.ic_avatar_foreground)
+                .error(R.drawable.ic_close_banner)
+                .into(attachment)
+
+
             published.text = post.published
             content.text = post.content
             likes.text = AndroidUtils.changeCountersImagin(post.likes)
