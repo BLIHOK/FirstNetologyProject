@@ -26,7 +26,7 @@ class PostRepositoryImpl : PostRepository {
         private val jsonType = "application/json".toMediaType()
     }
 
-    override fun getAllAsync(callback: PostRepository.GetAllCallback) {
+    override fun getAllAsync(callback: PostRepository.GetAllCallback<List<Post>>) {
         val request: Request = Request.Builder()
             .url("${BASE_URL}/api/slow/posts")
             .build()
@@ -53,7 +53,7 @@ class PostRepositoryImpl : PostRepository {
     }
 
 
-    override fun likeByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
+    override fun likeByIdAsync(id: Long, callback: PostRepository.GetAllCallback<Unit>) {
         val request = Request.Builder()
             .post("".toRequestBody())
             .url("${BASE_URL}/api/posts/$id/likes")
@@ -63,7 +63,7 @@ class PostRepositoryImpl : PostRepository {
             override fun onResponse(call: Call, response: Response) {
                 try {
                     if (response.isSuccessful) {
-                        callback.onSuccess()
+                        callback.onSuccess(Unit)
                     } else {
                         callback.onError(IOException("Ошибка: код ${response.code}"))
                     }
@@ -80,7 +80,7 @@ class PostRepositoryImpl : PostRepository {
         })
     }
 
-    override fun unlikeByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
+    override fun unlikeByIdAsync(id: Long, callback: PostRepository.GetAllCallback<Unit>) {
         val request = Request.Builder()
             .delete()
             .url("${BASE_URL}/api/posts/$id/likes")
@@ -90,7 +90,7 @@ class PostRepositoryImpl : PostRepository {
             override fun onResponse(call: Call, response: Response) {
                 try {
                     if (response.isSuccessful) {
-                        callback.onSuccess()
+                        callback.onSuccess(Unit)
                     } else {
                         callback.onError(IOException("Ошибка: код ${response.code}"))
                     }
@@ -107,7 +107,7 @@ class PostRepositoryImpl : PostRepository {
         })
     }
 
-    override fun shareByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
+    override fun shareByIdAsync(id: Long, callback: PostRepository.GetAllCallback<Unit>) {
         val request: Request = Request.Builder()
             .url("${BASE_URL}/api/slow/posts/$id")
             .build()
@@ -116,7 +116,7 @@ class PostRepositoryImpl : PostRepository {
             override fun onResponse(call: Call, response: Response) {
                 try {
                     if (response.isSuccessful) {
-                        callback.onSuccess()
+                        callback.onSuccess(Unit)
                     } else {
                         callback.onError(IOException("Ошибка: код ${response.code}"))
                     }
@@ -133,7 +133,7 @@ class PostRepositoryImpl : PostRepository {
         })
     }
 
-    override fun saveAsync(post: Post, callback: PostRepository.SingleOperationCallback) {
+    override fun saveAsync(post: Post, callback: PostRepository.GetAllCallback<Unit>) {
         val request: Request = Request.Builder()
             .post(gson.toJson(post).toRequestBody(jsonType))
             .url("${BASE_URL}/api/posts")
@@ -143,7 +143,7 @@ class PostRepositoryImpl : PostRepository {
             override fun onResponse(call: Call, response: Response) {
                 try {
                     if (response.isSuccessful) {
-                        callback.onSuccess()
+                        callback.onSuccess(Unit)
                     } else {
                         callback.onError(IOException("Ошибка: код ${response.code}"))
                     }
@@ -160,7 +160,7 @@ class PostRepositoryImpl : PostRepository {
         })
     }
 
-    override fun removeByIdAsync(id: Long, callback: PostRepository.SingleOperationCallback) {
+    override fun removeByIdAsync(id: Long, callback: PostRepository.GetAllCallback<Unit>) {
         val request: Request = Request.Builder()
             .delete()
             .url("${BASE_URL}/api/posts/$id")
@@ -170,7 +170,7 @@ class PostRepositoryImpl : PostRepository {
             override fun onResponse(call: Call, response: Response) {
                 try {
                     if (response.isSuccessful) {
-                        callback.onSuccess()
+                        callback.onSuccess(Unit)
                     } else {
                         callback.onError(IOException("Ошибка: код ${response.code}"))
                     }

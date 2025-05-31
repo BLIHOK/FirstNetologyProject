@@ -39,24 +39,10 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         loadPosts()
     }
 
-    //    fun loadPosts() {
-//        thread {
-//            // Начинаем загрузку
-//            _data.postValue(FeedModel(loading = true))
-//            try {
-//                // Данные успешно получены
-//                val posts = repository.getAll()
-//                FeedModel(posts = posts, empty = posts.isEmpty())
-//            } catch (e: IOException) {
-//                // Получена ошибка
-//                FeedModel(error = true)
-//            }.also(_data::postValue)
-//        }
-//    }
     fun loadPosts() {
         // Начинаем загрузку
         _data.postValue(FeedModel(loading = true))
-        repository.getAllAsync(object : PostRepository.GetAllCallback {
+        repository.getAllAsync(object : PostRepository.GetAllCallback<List<Post>> {
             override fun onSuccess(posts: List<Post>) {
                 _data.postValue(FeedModel(posts = posts, empty = posts.isEmpty()))
             }
@@ -77,8 +63,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             val newPost = post.copy(content = newContent)
-            repository.saveAsync(newPost, object : PostRepository.SingleOperationCallback {
-                override fun onSuccess() {
+            repository.saveAsync(newPost, object : PostRepository.GetAllCallback<Unit> {
+                override fun onSuccess(post: Unit) {
                     _postCreated.postValue(Unit)
                     edited.postValue(empty)
                     loadPosts() // Обновляем список после сохранения
@@ -97,8 +83,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun likeById(id: Long) {
-        repository.likeByIdAsync(id, object : PostRepository.SingleOperationCallback {
-            override fun onSuccess() {
+        repository.likeByIdAsync(id, object : PostRepository.GetAllCallback<Unit> {
+            override fun onSuccess(post: Unit) {
                 loadPosts() // Обновляем список после успеха
             }
 
@@ -109,8 +95,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun unlikeById(id: Long) {
-        repository.unlikeByIdAsync(id, object : PostRepository.SingleOperationCallback {
-            override fun onSuccess() {
+        repository.unlikeByIdAsync(id, object : PostRepository.GetAllCallback<Unit> {
+            override fun onSuccess(post: Unit) {
                 loadPosts()
             }
 
@@ -121,8 +107,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun shareById(id: Long) {
-        repository.shareByIdAsync(id, object : PostRepository.SingleOperationCallback {
-            override fun onSuccess() {
+        repository.shareByIdAsync(id, object : PostRepository.GetAllCallback<Unit> {
+            override fun onSuccess(post: Unit) {
                 loadPosts()
             }
 
@@ -140,8 +126,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             )
         )
 
-        repository.removeByIdAsync(id, object : PostRepository.SingleOperationCallback {
-            override fun onSuccess() {
+        repository.removeByIdAsync(id, object : PostRepository.GetAllCallback<Unit> {
+            override fun onSuccess(post: Unit) {
             }
 
             override fun onError(e: Exception) {
