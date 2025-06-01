@@ -58,13 +58,14 @@ class PostViewHolder(
                 .circleCrop()
                 .into(authorAvatar)
 
-            val attachmentUrl = "http://10.0.2.2:9999/images/${post.attachment}"
-            attachment.visibility = View.VISIBLE
+            val attachmentUrl = "http://10.0.2.2:9999/images/${post.attachment?.url}"
+            videoContent.visibility = View.VISIBLE
             Glide.with(binding.root)
                 .load(attachmentUrl)
                 .placeholder(R.drawable.ic_avatar_foreground)
                 .error(R.drawable.ic_close_banner)
-                .into(attachment)
+                .timeout(20_000)
+                .into(videoContent)
 
 
             published.text = post.published

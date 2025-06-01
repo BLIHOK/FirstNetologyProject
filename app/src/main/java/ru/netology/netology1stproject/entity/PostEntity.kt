@@ -60,7 +60,7 @@ data class PostEntity(
     }
 }
 
-@Entity
+
 data class AttachmentEmbeddable(
 
     var url: String,
