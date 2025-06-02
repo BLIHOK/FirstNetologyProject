@@ -28,6 +28,8 @@ private val empty = Post(
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
+
+
     private val repository: PostRepository = PostRepositoryImpl()
     private val _data = MutableLiveData(FeedModel())
     val data: LiveData<FeedModel>
@@ -47,10 +49,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         repository.getAllAsync(object : PostRepository.GetAllCallback<List<Post>> {
             override fun onSuccess(posts: List<Post>) {
                 _data.postValue(FeedModel(posts = posts, empty = posts.isEmpty()))
+
             }
 
             override fun onError(e: Exception) {
-                _data.postValue(FeedModel(error = true))
+
+                _data.postValue(FeedModel(error = true, errorMessage = e.message))
             }
         })
     }
@@ -65,8 +69,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             val newPost = post.copy(content = newContent)
-            repository.saveAsync(newPost, object : PostRepository.GetAllCallback<Unit> {
-                override fun onSuccess(post: Unit) {
+            repository.saveAsync(newPost, object : PostRepository.GetAllCallback<Post> {
+                override fun onSuccess(post: Post) {
                     _postCreated.postValue(Unit)
                     edited.postValue(empty)
                     loadPosts() // Обновляем список после сохранения
@@ -85,8 +89,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun likeById(id: Long) {
-        repository.likeByIdAsync(id, object : PostRepository.GetAllCallback<Unit> {
-            override fun onSuccess(post: Unit) {
+        repository.likeByIdAsync(id, object : PostRepository.GetAllCallback<Post> {
+            override fun onSuccess(post: Post) {
                 loadPosts() // Обновляем список после успеха
             }
 
@@ -97,8 +101,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun unlikeById(id: Long) {
-        repository.unlikeByIdAsync(id, object : PostRepository.GetAllCallback<Unit> {
-            override fun onSuccess(post: Unit) {
+        repository.unlikeByIdAsync(id, object : PostRepository.GetAllCallback<Post> {
+            override fun onSuccess(post: Post) {
                 loadPosts()
             }
 

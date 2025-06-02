@@ -60,7 +60,7 @@ class PostViewHolder(
 
             val attachmentUrl = "http://10.0.2.2:9999/images/${post.attachment?.url}"
             videoContent.visibility = View.VISIBLE
-            Glide.with(binding.root)
+            Glide.with(root)
                 .load(attachmentUrl)
                 .placeholder(R.drawable.ic_avatar_foreground)
                 .error(R.drawable.ic_close_banner)
@@ -89,12 +89,12 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
 
-            if (post.video == null) videoContent.visibility = View.GONE
-            if (post.video != null) videoContent.visibility = View.VISIBLE
+//            if (post.video == null) videoContent.visibility = View.GONE
+//            if (post.video != null) videoContent.visibility = View.VISIBLE
 
-            videoContent.setOnClickListener {
-                onInteractionListener.playMedia(post)
-            }
+//            videoContent.setOnClickListener {
+//                onInteractionListener.playMedia(post)
+//            }
 
             menu.setOnClickListener {
                 menu.isChecked = true

@@ -20,16 +20,21 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures.viewBinding true
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders.usesCleartextTraffic = false
+            buildConfigField "String", "BASE_URL", '"https://nmedia.netology.ru"'
         }
         debug {
             manifestPlaceholders.usesCleartextTraffic = true
+            buildConfigField "String", "BASE_URL", '"http://10.0.2.2:9999"'
         }
     }
     compileOptions {
@@ -64,6 +69,8 @@ dependencies {
     def preference_ktx_version = "1.2.1"
     def okhttp_bom_version = "4.12.0"
     def swipe_refresh_layout_version = "1.2.0-beta01"
+    def retrofit_version = "2.11.0"
+    def retrofitgson_version = "2.11.0"
 
 
     implementation "androidx.activity:activity-ktx:$activity_ktx_version"
@@ -95,12 +102,16 @@ dependencies {
     implementation platform("com.squareup.okhttp3:okhttp-bom:$okhttp_bom_version")
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitgson_version"
+
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_layout_version")
 
 
     implementation('com.github.bumptech.glide:glide:4.14.2')
 
-    kapt "android.arch.lifecycle:compiler:1.0.0"
+    kapt "android.arch.lifecycle:compiler:1.1.1"
     kapt 'com.github.bumptech.glide:compiler:4.14.2'
+
 }

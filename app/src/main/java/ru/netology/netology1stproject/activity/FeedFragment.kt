@@ -4,6 +4,7 @@ package ru.netology.netology1stproject.activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,16 +76,27 @@ class FeedFragment : Fragment() {
             }
         })
 
+
+
         with(binding) {
+
             list.adapter = adapter
             viewModel.data.observe(viewLifecycleOwner) { state ->
                 adapter.submitList(state.posts)
                 progress?.isVisible = state.loading
                 errorGroup?.isVisible = state.error
                 emptyText?.isVisible = state.empty
+                Log.d("FeedFragment", "ErrorGroup Visibility: ${errorGroup?.isVisible}")
+
+                if (state.error) {
+                    binding.retryTitle?.text =
+                        state.errorMessage ?: getString(R.string.error_loading)
+                }
             }
 
             retryButton?.setOnClickListener {
+                Log.d("Retry Button", "Retry button pressed")
+
                 viewModel.loadPosts()
             }
 

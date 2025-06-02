@@ -87,12 +87,12 @@
     <ImageView
         android:id="@+id/video_content"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="@dimen/common_spacing2"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="@dimen/common_spacing2"
         android:contentDescription="@string/press_to_start_video"
-        android:foreground="@mipmap/ic_rick_astley"
+
         android:text="@string/choose_share_post"
         android:visibility="visible"
         android:adjustViewBounds="true"
