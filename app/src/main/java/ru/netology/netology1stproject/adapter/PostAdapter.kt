@@ -88,14 +88,6 @@ class PostViewHolder(
             shares.setOnClickListener {
                 onInteractionListener.onShare(post)
             }
-
-//            if (post.video == null) videoContent.visibility = View.GONE
-//            if (post.video != null) videoContent.visibility = View.VISIBLE
-
-//            videoContent.setOnClickListener {
-//                onInteractionListener.playMedia(post)
-//            }
-
             menu.setOnClickListener {
                 menu.isChecked = true
                 val popupMenu = PopupMenu(it.context, it).apply {

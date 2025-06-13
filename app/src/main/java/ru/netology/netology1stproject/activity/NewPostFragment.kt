@@ -47,8 +47,9 @@ class NewPostFragment : Fragment() {
 
         binding.save.setOnClickListener {
             if (binding.edit.text.isNotBlank()) {
-                viewModel.changeContentAndSave(binding.edit.text.toString())
-                sharedPreferences?.edit()?.remove("textValue")?.apply()////
+                viewModel.changeContent(binding.edit.text.toString())
+                viewModel.save()
+//                sharedPreferences?.edit()?.remove("textValue")?.apply()////
                 AndroidUtils.HideKeyboard(requireView())
             }
         }

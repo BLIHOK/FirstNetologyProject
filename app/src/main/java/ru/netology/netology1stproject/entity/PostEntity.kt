@@ -24,6 +24,7 @@ data class PostEntity(
     val video: String?,
     @Embedded
     var attachment: AttachmentEmbeddable?,
+    val isSynced: Boolean,
 ) {
     fun toDto() = Post(
         id,
@@ -37,7 +38,8 @@ data class PostEntity(
         shareByMe,
         watchCount,
         video,
-        attachment?.toDto()
+        attachment?.toDto(),
+        isSynced,
     )
 
     companion object {
@@ -55,6 +57,7 @@ data class PostEntity(
                 dto.watchCount,
                 dto.video,
                 AttachmentEmbeddable.fromDto(dto.attachment),
+                dto.isSynced,
             )
 
     }
@@ -75,3 +78,6 @@ data class AttachmentEmbeddable(
         }
     }
 }
+
+fun List<PostEntity>.toDto(): List<Post> = map(PostEntity::toDto)
+fun List<Post>.toEntity(): List<PostEntity> = map(PostEntity::fromDto)

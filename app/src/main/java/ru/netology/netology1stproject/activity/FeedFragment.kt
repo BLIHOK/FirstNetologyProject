@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.netology1stproject.R
 import ru.netology.netology1stproject.activity.NewPostFragment.Companion.textArg
 import ru.netology.netology1stproject.adapter.PostAdapter
@@ -81,18 +82,26 @@ class FeedFragment : Fragment() {
         with(binding) {
 
             list.adapter = adapter
-            viewModel.data.observe(viewLifecycleOwner) { state ->
-                adapter.submitList(state.posts)
+            viewModel.dataState.observe(viewLifecycleOwner, { state ->
+//                adapter.submitList(state.posts)
                 progress?.isVisible = state.loading
+                swiperefresh?.isRefreshing = state.refreshing
                 errorGroup?.isVisible = state.error
-                emptyText?.isVisible = state.empty
+//                emptyText?.isVisible = state.empty
                 Log.d("FeedFragment", "ErrorGroup Visibility: ${errorGroup?.isVisible}")
 
                 if (state.error) {
-                    binding.retryTitle?.text =
-                        state.errorMessage ?: getString(R.string.error_loading)
+                    Snackbar.make(root, R.string.error_loading, Snackbar.LENGTH_LONG)
+                        .setAction("Retry") { viewModel.loadPosts() }
+                        .show()
                 }
-            }
+            })
+
+            viewModel.data.observe(viewLifecycleOwner, { state ->
+                adapter.submitList(state.posts)
+                emptyText?.isVisible = state.empty
+
+            })
 
             retryButton?.setOnClickListener {
                 Log.d("Retry Button", "Retry button pressed")
@@ -115,12 +124,15 @@ class FeedFragment : Fragment() {
         }
 
         binding.swiperefresh?.setOnRefreshListener {
-            viewModel.loadPosts()
+            viewModel.refreshPosts()
 
             // Hide swipe to refresh icon animation
             binding.swiperefresh.isRefreshing = false
         }
 
+        Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_LONG)
+            .setAction(R.string.retry_loading) { viewModel.loadPosts() }
+            .show()
 
         return binding.root
     }
