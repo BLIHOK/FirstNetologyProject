@@ -130,9 +130,12 @@ class FeedFragment : Fragment() {
             binding.swiperefresh.isRefreshing = false
         }
 
-        Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_LONG)
-            .setAction(R.string.retry_loading) { viewModel.loadPosts() }
-            .show()
+//        Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_LONG)
+//            .setAction(R.string.retry_loading) {
+//                val tempPost = repository.getUnsyncedPost() // Получите несинхронизированный пост
+//                viewModel.save(tempPost) // Повторите попытку
+//            }
+//            .show()
 
         return binding.root
     }

@@ -53,7 +53,7 @@ dependencies {
     def recyclerview_version = "1.4.0"
     def fragment_version = "1.8.6"
     def gson_version = "2.11.0"
-    def room_ver = "2.6.1"
+    def room_ver = "2.7.1"
     def play_services_base_version = "18.5.0"
     def core_ktx_version = "1.15.0"
     def appcompat_version = "1.7.0"
@@ -105,12 +105,11 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitgson_version"
 
-
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_layout_version")
-
 
     implementation('com.github.bumptech.glide:glide:4.14.2')
 
+    implementation "androidx.room:room-ktx:$room_ver"
     kapt "android.arch.lifecycle:compiler:1.1.1"
     kapt 'com.github.bumptech.glide:compiler:4.14.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2"

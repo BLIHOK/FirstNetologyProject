@@ -101,6 +101,7 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
         try {
             val response = PostsApi.retrofitService.save(post)
             if (!response.isSuccessful) {
+                dao.removeById(tempId)
                 throw ApiError(response.code(), response.message())
             }
 
@@ -109,6 +110,7 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
             dao.insert(syncedEntity)
             return syncedPost
         } catch (e: Exception) {
+            dao.removeById(tempId)
             throw NetworkError
         }
     }

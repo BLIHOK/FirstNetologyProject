@@ -5,6 +5,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.netology.netology1stproject.dto.Post
@@ -37,12 +38,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PostRepository = PostRepositoryImpl(
         AppDb.getInstance(context = application).postDao()
     )
-    private val _data = MutableLiveData<FeedModel>()
-//    val data: LiveData<FeedModel> = repository.data.map(::FeedModel)
-//        get() = _data
-
-    val data: LiveData<FeedModel>
-        get() = _data
+    val data: LiveData<FeedModel> = repository.data.map(::FeedModel)
 
     private val _dataState = MutableLiveData<FeedModelState>()
     val dataState: LiveData<FeedModelState>
@@ -96,23 +92,10 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun likeById(id: Long) {
-        val currentPosts = _data.value?.posts ?: emptyList()
-        val postToUpdate = currentPosts.find { it.id == id } ?: return
-
-        val updatedPost = postToUpdate.copy(
-            likedByMe = !postToUpdate.likedByMe,
-            likes = if (postToUpdate.likedByMe) postToUpdate.likes - 1 else postToUpdate.likes + 1
-        )
-
-        val updatedPosts = currentPosts.map { if (it.id == id) updatedPost else it }
-        _data.postValue(_data.value?.copy(posts = updatedPosts)) // Обновить UI
-
         viewModelScope.launch {
             try {
                 repository.likeByIdAsync(id)
             } catch (e: Exception) {
-                // Откат изменений
-                _data.postValue(_data.value?.copy(posts = currentPosts))
                 _dataState.postValue(FeedModelState(error = true))
             }
         }
@@ -142,15 +125,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun removeById(id: Long) {
-        val oldPosts = data.value?.posts.orEmpty()
-        _data.value =
-            _data.value?.copy(posts = oldPosts.filter { it.id != id }) // Удаляем пост из UI
         viewModelScope.launch {
             try {
-                repository.removeByIdAsync(id) // Вызываем метод репозитория
+                repository.removeByIdAsync(id)
             } catch (e: Exception) {
-                _data.value = _data.value?.copy(posts = oldPosts) // Восстанавливаем UI
-                _dataState.value = FeedModelState(error = true) // Показ ошибки
+                _dataState.value = FeedModelState(error = true)
             }
         }
     }
