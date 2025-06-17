@@ -31,8 +31,8 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
     }
 
     override suspend fun likeByIdAsync(id: Long) {
-        dao.likeById(id)
         val post = dao.getById(id)
+        dao.likeById(id)
         try {
             // Отправка на сервер
             val response = PostsApi.retrofitService.likeById(id)
@@ -47,8 +47,8 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
     }
 
     override suspend fun unlikeByIdAsync(id: Long) {
-        dao.likeById(id)
         val post = dao.getById(id)
+        dao.likeById(id)
         try {
 
             val response = PostsApi.retrofitService.dislikeById(id)
@@ -107,6 +107,8 @@ class PostRepositoryImpl(private val dao: PostDao) : PostRepository {
 
             val syncedPost = response.body() ?: throw UnknownError()
             val syncedEntity = PostEntity.fromDto(syncedPost.copy(isSynced = true))
+
+            dao.removeById(tempId)
             dao.insert(syncedEntity)
             return syncedPost
         } catch (e: Exception) {
