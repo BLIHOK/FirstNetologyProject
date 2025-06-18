@@ -92,4 +92,17 @@
         android:contentDescription="@string/save_post"
         app:srcCompat="@drawable/ic_add_button" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/newPostsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Свежие записи"
+        android:visibility="gone"
+        app:layout_anchorGravity="top|center_horizontal"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

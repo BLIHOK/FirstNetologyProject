@@ -16,6 +16,7 @@ data class Post(
     val video: String?,
     var attachment: Attachment?,
     val isSynced: Boolean,
+    val isNew: Boolean,
 )
 
 data class Attachment(

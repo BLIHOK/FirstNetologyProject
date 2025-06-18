@@ -25,6 +25,7 @@ data class PostEntity(
     @Embedded
     var attachment: AttachmentEmbeddable?,
     val isSynced: Boolean,
+    val isNew: Boolean,
 ) {
     fun toDto() = Post(
         id,
@@ -40,6 +41,7 @@ data class PostEntity(
         video,
         attachment?.toDto(),
         isSynced,
+        isNew,
     )
 
     companion object {
@@ -58,6 +60,7 @@ data class PostEntity(
                 dto.video,
                 AttachmentEmbeddable.fromDto(dto.attachment),
                 dto.isSynced,
+                dto.isNew,
             )
 
     }

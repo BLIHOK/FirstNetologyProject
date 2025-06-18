@@ -130,6 +130,30 @@ class FeedFragment : Fragment() {
             binding.swiperefresh.isRefreshing = false
         }
 
+
+        viewModel.newerCount.observe(viewLifecycleOwner) { state ->
+            // TODO: just log it, interaction must be in homework
+            println(state)
+        }
+
+        // Наблюдаем за новыми постами
+        viewModel.newPostsAvailable.observe(viewLifecycleOwner) { count ->
+            if (count > 0) {
+                binding.newPostsButton?.visibility = View.VISIBLE
+                binding.newPostsButton?.text = "Свежие записи: $count"
+            } else {
+                binding.newPostsButton?.visibility = View.GONE
+            }
+        }
+
+        // Обработчик нажатия на плашку
+        binding.newPostsButton?.setOnClickListener {
+            viewModel.showNewPosts()
+            // Плавный скролл к началу списка
+            binding.list.smoothScrollToPosition(0)
+        }
+
+
 //        Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_LONG)
 //            .setAction(R.string.retry_loading) {
 //                val tempPost = repository.getUnsyncedPost() // Получите несинхронизированный пост

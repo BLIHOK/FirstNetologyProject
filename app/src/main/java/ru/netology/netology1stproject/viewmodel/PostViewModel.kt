@@ -5,8 +5,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import ru.netology.netology1stproject.dto.Post
 import ru.netology.netology1stproject.model.FeedModel
@@ -30,7 +34,8 @@ private val empty = Post(
     published = "",
     video = null,
     attachment = null,
-    isSynced = false
+    isSynced = false,
+    isNew = false
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
@@ -38,7 +43,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PostRepository = PostRepositoryImpl(
         AppDb.getInstance(context = application).postDao()
     )
-    val data: LiveData<FeedModel> = repository.data.map(::FeedModel)
+    val data: LiveData<FeedModel> = repository.data
+        .map(::FeedModel)
+        .asLiveData(Dispatchers.Default)
 
     private val _dataState = MutableLiveData<FeedModelState>()
     val dataState: LiveData<FeedModelState>
@@ -48,6 +55,15 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val _postCreated = SingleLiveEvent<Unit>()
     val postCreated: LiveData<Unit>
         get() = _postCreated
+
+    private val _newPostsAvailable = MutableLiveData<Int>()
+    val newPostsAvailable: LiveData<Int> get() = _newPostsAvailable
+
+    val newerCount: LiveData<Int> = data.switchMap {
+        repository.getNewerCount(it.posts.firstOrNull()?.id ?: 0L)
+            .catch { e -> e.printStackTrace() }
+            .asLiveData(Dispatchers.Default)
+    }
 
     init {
         loadPosts()
@@ -60,6 +76,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             _dataState.value = FeedModelState()
         } catch (e: Exception) {
             _dataState.value = FeedModelState(error = true)
+        }
+
+        viewModelScope.launch {
+            repository.getNewerCount(0).collect { count ->
+                if (count > 0) {
+                    _newPostsAvailable.value = count
+                }
+            }
         }
     }
 
@@ -110,6 +134,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             } catch (e: Exception) {
                 _dataState.value = FeedModelState(error = true)
             }
+
         }
     }
 
@@ -146,6 +171,15 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun cancelEdit() {
         edited.value = empty
+    }
+
+    fun showNewPosts() {
+        viewModelScope.launch {
+            repository.markAllAsShown()
+            _newPostsAvailable.value = 0
+            // Обновляем данные
+            repository.getAllAsync()
+        }
     }
 }
 
