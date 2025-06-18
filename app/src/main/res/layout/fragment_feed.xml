@@ -11,16 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- ProgressBar -->
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
+        <!-- SwipeRefreshLayout -->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/post_card" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <!-- TextView Empty -->
         <TextView
@@ -34,135 +39,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- SwipeRefreshLayout -->
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swiperefresh"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/barrier_top"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/post_card" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <!-- EditText -->
-        <EditText
-            android:id="@+id/edit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:hint="@string/post_text"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:padding="@dimen/common_spacing"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/save"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <!-- ImageButton Save -->
-        <ImageButton
-            android:id="@+id/save"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginEnd="@dimen/common_spacing"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/save_post"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add_button" />
-
-        <!-- Barrier -->
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_top"
+        <!-- Error Group -->
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/errorGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:barrierDirection="top"
-            app:constraint_referenced_ids="edit, save" />
+            app:constraint_referenced_ids="retryTitle,retryButton" />
 
-        <!-- Banner -->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/banner"
-            android:layout_width="0dp"
+        <!-- Retry Button -->
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="2dp"
+            android:text="@string/retry_loading"
+            app:layout_constraintBottom_toTopOf="@id/retryTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Retry Title -->
+        <TextView
+            android:id="@+id/retryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_loading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- ProgressBar -->
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/barrier_top"
-            app:layout_constraintEnd_toEndOf="@id/save"
-            app:layout_constraintStart_toStartOf="@id/edit">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Содержимое banner -->
-            <ImageView
-                android:id="@+id/edit_banner_icon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/edit_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_pencil_banner" />
-
-            <TextView
-                android:id="@+id/top_banner_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/edit_message_banner"
-                app:layout_constraintEnd_toStartOf="@id/close_button"
-                app:layout_constraintStart_toEndOf="@id/edit_banner_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/bot_banner_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/netology_banner"
-                app:layout_constraintEnd_toStartOf="@id/close_button"
-                app:layout_constraintStart_toEndOf="@id/edit_banner_icon"
-                app:layout_constraintTop_toBottomOf="@id/top_banner_text" />
-
-            <ImageButton
-                android:id="@+id/close_button"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/close_edit"
-                android:scaleType="fitXY"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_close_banner" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Error Group -->
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/errorGroup"
+    <!-- FloatingActionButton Save -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="retryTitle,retryButton" />
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:layout_marginBottom="@dimen/common_spacing"
+        android:backgroundTint="@color/colorSecondary"
+        android:contentDescription="@string/save_post"
+        app:srcCompat="@drawable/ic_add_button" />
 
-    <!-- Retry Button -->
-    <Button
-        android:id="@+id/retryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/retry_loading"
-        app:layout_anchor="@+id/swiperefresh"
-        app:layout_anchorGravity="center" />
-
-    <!-- Retry Title -->
-    <TextView
-        android:id="@+id/retryTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/error_loading"
-        app:layout_anchor="@+id/retryButton"
-        app:layout_anchorGravity="bottom|center" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
